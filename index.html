@@ -2,8 +2,7 @@
 <style>
 *{box-sizing:border-box}body{font-family:system-ui;background:#0a0a0b;color:#e5e5e5;padding:24px;margin:0}
 h1{color:#fff;margin:0 0 4px}h2{color:#666;font-size:14px;font-weight:400;margin:0 0 28px}
-.banner{background:#1a2a1a;border:1px solid #2a3a2a;border-radius:8px;padding:12px 16px;margin-bottom:24px;font-size:13px;color:#6ee7b7}
-.banner strong{color:#4ade80}
+.banner{background:#1a1a2a;border:1px solid #2a2a4a;border-radius:8px;padding:12px 16px;margin-bottom:24px;font-size:13px;color:#a5b4fc}
 .stats{display:flex;gap:16px;margin-bottom:32px;flex-wrap:wrap}
 .stat{background:#141414;border:1px solid #222;border-radius:8px;padding:12px 20px}
 .stat .num{font-size:24px;font-weight:700;color:#fff}
@@ -13,18 +12,17 @@ h1{color:#fff;margin:0 0 4px}h2{color:#666;font-size:14px;font-weight:400;margin
 .card-header{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
 .card-id{font-size:11px;color:#555;font-family:monospace}
 .badge{padding:2px 8px;border-radius:12px;font-size:10px;font-weight:500}
-.badge-gen{background:#022c22;color:#4ade80}.badge-skip{background:#1a1a1a;color:#444}.badge-wm{background:#1a2a1a;color:#6ee7b7}
-.badge-unsplash{background:#1a1a2a;color:#818cf8}
+.badge-unsplash{background:#1a1a2a;color:#a5b4fc}.badge-wm{background:#1a2a1a;color:#6ee7b7}
+.badge-ai{background:#2a1a1a;color:#f87171}.badge-skip{background:#1a1a1a;color:#444}
 .card-title{font-size:14px;line-height:1.45;color:#bbb;margin:10px 0 8px}
 .card img{width:100%;border-radius:6px;margin-top:10px;border:1px solid #2a2a2a;max-height:220px;object-fit:cover}
 .card-meta{font-size:11px;color:#444;margin-top:10px;display:flex;gap:12px}
 .visual-yes{border-left:3px solid #22c55e}.visual-no{border-left:3px solid #333}
-.archetype{font-size:10px;color:#555;background:#1a1a1a;padding:2px 7px;border-radius:10px}
 .add{font-size:11px;color:#555}
 </style></head><body>
 <h1>Oviro Content Factory</h1>
 <h2>personal-brand lane · Andre · X/Twitter</h2>
-<div class="banner"><strong>Visual pipeline updated:</strong> now tries real images (Wikimedia Commons) before AI generation. Posts are source-tagged so you know which image type each received.</div>
+<div class="banner"><b>Unsplash live:</b> real-image search now primary (50 req/day) → Wikimedia free fallback → Gemini AI last resort</div>
 <div class="stats">
 <div class="stat"><div class="num">48</div><div class="label">Total Items</div></div>
 <div class="stat"><div class="num">29</div><div class="label">In Review</div></div>
@@ -117,7 +115,7 @@ h1{color:#fff;margin:0 0 4px}h2{color:#666;font-size:14px;font-weight:400;margin
 <div class="card-meta"><span>QA: 5</span><span>x</span></div>
 </div>
 <div class="card visual-yes">
-<div class="card-header"><span class="card-id">ITEM-20260407-0001</span><span class="badge badge-gen">ai</span><span class="add">+85</span></div>
+<div class="card-header"><span class="card-id">ITEM-20260407-0001</span><span class="badge badge-ai">ai</span><span class="add">+85</span></div>
 <span class="archetype">blocked-handoff</span>
 <div class="card-title">Most AI workflows look smart until you have to run them twice.Demo automation is easy. Rel #1</div>
 <img src="./images/ITEM-20260407-0001/ITEM-20260407-0001-visual.jpg" />
@@ -149,7 +147,7 @@ h1{color:#fff;margin:0 0 4px}h2{color:#666;font-size:14px;font-weight:400;margin
 <div class="card-meta"><span>QA: 4</span><span>x</span></div>
 </div>
 <div class="card visual-yes">
-<div class="card-header"><span class="card-id">ITEM-20260406-0011</span><span class="badge badge-gen">ai</span><span class="add">+0</span></div>
+<div class="card-header"><span class="card-id">ITEM-20260406-0011</span><span class="badge badge-ai">ai</span><span class="add">+0</span></div>
 <div class="card-title">The difference between a demo automation and a reliable operating system #2</div>
 <img src="./images/ITEM-20260406-0011/ITEM-20260406-0011-visual.jpg" />
 <div class="card-meta"><span>QA: 4</span><span>x</span></div>
