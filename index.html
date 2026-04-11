@@ -1,0 +1,157 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Oviro Content Factory</title>
+<style>
+*{box-sizing:border-box}body{font-family:system-ui;background:#0a0a0b;color:#e5e5e5;padding:24px;margin:0}
+h1{color:#fff;margin:0 0 4px}h2{color:#666;font-size:14px;font-weight:400;margin:0 0 28px}
+.banner{background:#1a2a1a;border:1px solid #2a3a2a;border-radius:8px;padding:12px 16px;margin-bottom:24px;font-size:13px;color:#6ee7b7}
+.banner strong{color:#4ade80}
+.stats{display:flex;gap:16px;margin-bottom:32px;flex-wrap:wrap}
+.stat{background:#141414;border:1px solid #222;border-radius:8px;padding:12px 20px}
+.stat .num{font-size:24px;font-weight:700;color:#fff}
+.stat .label{font-size:11px;color:#555;text-transform:uppercase;letter-spacing:.5px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:20px}
+.card{background:#141414;border:1px solid #222;border-radius:12px;padding:18px}
+.card-header{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+.card-id{font-size:11px;color:#555;font-family:monospace}
+.badge{padding:2px 8px;border-radius:12px;font-size:10px;font-weight:500}
+.badge-gen{background:#022c22;color:#4ade80}.badge-skip{background:#1a1a1a;color:#444}.badge-wm{background:#1a2a1a;color:#6ee7b7}
+.badge-unsplash{background:#1a1a2a;color:#818cf8}
+.card-title{font-size:14px;line-height:1.45;color:#bbb;margin:10px 0 8px}
+.card img{width:100%;border-radius:6px;margin-top:10px;border:1px solid #2a2a2a;max-height:220px;object-fit:cover}
+.card-meta{font-size:11px;color:#444;margin-top:10px;display:flex;gap:12px}
+.visual-yes{border-left:3px solid #22c55e}.visual-no{border-left:3px solid #333}
+.archetype{font-size:10px;color:#555;background:#1a1a1a;padding:2px 7px;border-radius:10px}
+.add{font-size:11px;color:#555}
+</style></head><body>
+<h1>Oviro Content Factory</h1>
+<h2>personal-brand lane · Andre · X/Twitter</h2>
+<div class="banner"><strong>Visual pipeline updated:</strong> now tries real images (Wikimedia Commons) before AI generation. Posts are source-tagged so you know which image type each received.</div>
+<div class="stats">
+<div class="stat"><div class="num">48</div><div class="label">Total Items</div></div>
+<div class="stat"><div class="num">29</div><div class="label">In Review</div></div>
+<div class="stat"><div class="num">16</div><div class="label">Images on Disk</div></div>
+</div>
+<div class="grid">
+<div class="card visual-no">
+<div class="card-header"><span class="card-id">ITEM-20260407-0021</span><span class="badge badge-skip">no-visual</span><span class="add">+0</span></div>
+<div class="card-title">4 hours debugging an agent loop. Bug was a missing newline in prompt config. That&#x27;s it.</div>
+<div class="card-meta"><span>QA: 5</span><span>x</span></div>
+</div>
+<div class="card visual-no">
+<div class="card-header"><span class="card-id">ITEM-20260407-0020</span><span class="badge badge-skip">no-visual</span><span class="add">+0</span></div>
+<div class="card-title">4 hours debugging an agent loop. Missing newline in prompt config. That&#x27;s it.</div>
+<div class="card-meta"><span>QA: 5</span><span>x</span></div>
+</div>
+<div class="card visual-no">
+<div class="card-header"><span class="card-id">ITEM-20260407-0019</span><span class="badge badge-skip">no-visual</span><span class="add">+0</span></div>
+<div class="card-title">4 hours debugging an agent loop. Missing newline in prompt config. That&#x27;s it.</div>
+<div class="card-meta"><span>QA: 5</span><span>x</span></div>
+</div>
+<div class="card visual-no">
+<div class="card-header"><span class="card-id">ITEM-20260407-0018</span><span class="badge badge-skip">no-visual</span><span class="add">+0</span></div>
+<div class="card-title">Spent 4 hours debugging an agent loop. The bug? A missing newline in the prompt config. Th</div>
+<div class="card-meta"><span>QA: 5</span><span>x</span></div>
+</div>
+<div class="card visual-no">
+<div class="card-header"><span class="card-id">ITEM-20260407-0017</span><span class="badge badge-skip">no-visual</span><span class="add">+0</span></div>
+<div class="card-title">4 hours debugging an agent loop. Missing newline in prompt config. That&#x27;s it.</div>
+<div class="card-meta"><span>QA: 5</span><span>x</span></div>
+</div>
+<div class="card visual-no">
+<div class="card-header"><span class="card-id">ITEM-20260407-0016</span><span class="badge badge-skip">no-visual</span><span class="add">+0</span></div>
+<div class="card-title">Spent 4 hours debugging an agent loop. The bug? A missing newline in the prompt config. Th</div>
+<div class="card-meta"><span>QA: 5</span><span>x</span></div>
+</div>
+<div class="card visual-no">
+<div class="card-header"><span class="card-id">ITEM-20260407-0015</span><span class="badge badge-skip">no-visual</span><span class="add">+0</span></div>
+<div class="card-title">4 hours debugging an agent loop. Missing newline in prompt config. That&#x27;s it. #1</div>
+<div class="card-meta"><span>QA: 5</span><span>x</span></div>
+</div>
+<div class="card visual-no">
+<div class="card-header"><span class="card-id">ITEM-20260407-0014</span><span class="badge badge-skip">no-visual</span><span class="add">+0</span></div>
+<div class="card-title">4 hours debugging an agent loop. Missing newline in prompt config. That&#x27;s it. #1</div>
+<div class="card-meta"><span>QA: 5</span><span>x</span></div>
+</div>
+<div class="card visual-no">
+<div class="card-header"><span class="card-id">ITEM-20260407-0013</span><span class="badge badge-skip">no-visual</span><span class="add">+10</span></div>
+<div class="card-title">Corporate admin by day, AI builder by night. The mental switch is wild. Sometimes I wonder #3</div>
+<div class="card-meta"><span>QA: 5</span><span>x</span></div>
+</div>
+<div class="card visual-no">
+<div class="card-header"><span class="card-id">ITEM-20260407-0012</span><span class="badge badge-skip">no-visual</span><span class="add">+0</span></div>
+<div class="card-title">Chasing the latest AI tool for my side project? It&#x27;s an asymmetric downside trade. Huge ti #2</div>
+<div class="card-meta"><span>QA: 5</span><span>x</span></div>
+</div>
+<div class="card visual-no">
+<div class="card-header"><span class="card-id">ITEM-20260407-0011</span><span class="badge badge-skip">no-visual</span><span class="add">+10</span></div>
+<div class="card-title">4 hours debugging an agent loop. Missing newline in prompt config. That&#x27;s it. #1</div>
+<div class="card-meta"><span>QA: 5</span><span>x</span></div>
+</div>
+<div class="card visual-no">
+<div class="card-header"><span class="card-id">ITEM-20260407-0010</span><span class="badge badge-skip">no-visual</span><span class="add">+52</span></div>
+<div class="card-title">My Sachbearbeiter job: document everything. Boring. But it means I don&#x27;t miss steps buildi #3</div>
+<div class="card-meta"><span>QA: 5</span><span>x</span></div>
+</div>
+<div class="card visual-no">
+<div class="card-header"><span class="card-id">ITEM-20260407-0008</span><span class="badge badge-skip">no-visual</span><span class="add">+10</span></div>
+<div class="card-title">4 hours debugging an agent loop. The bug: a missing newline in the prompt config. That&#x27;s i #1</div>
+<div class="card-meta"><span>QA: 4</span><span>x</span></div>
+</div>
+<div class="card visual-no">
+<div class="card-header"><span class="card-id">ITEM-20260407-0007</span><span class="badge badge-skip">no-visual</span><span class="add">+0</span></div>
+<div class="card-title">My Sachbearbeiter job in Switzerland taught me something unexpected for Oviro: the grind o #3</div>
+<div class="card-meta"><span>QA: 4</span><span>x</span></div>
+</div>
+<div class="card visual-no">
+<div class="card-header"><span class="card-id">ITEM-20260407-0005</span><span class="badge badge-skip">no-visual</span><span class="add">+0</span></div>
+<div class="card-title">Spent [4 hours] debugging an agent loop. The bug was [a missing newline in a config]. That #1</div>
+<div class="card-meta"><span>QA: 4</span><span>x</span></div>
+</div>
+<div class="card visual-no">
+<div class="card-header"><span class="card-id">ITEM-20260407-0003</span><span class="badge badge-skip">no-visual</span><span class="add">+0</span></div>
+<div class="card-title">Most people miss the Why in this.Why most &#x27;opportunities&#x27; in building share the same failu #2</div>
+<div class="card-meta"><span>QA: 5</span><span>x</span></div>
+</div>
+<div class="card visual-no">
+<div class="card-header"><span class="card-id">ITEM-20260407-0002</span><span class="badge badge-skip">no-visual</span><span class="add">+0</span></div>
+<div class="card-title">Most AI workflows look smart until you have to run them twice. #1</div>
+<div class="card-meta"><span>QA: 5</span><span>x</span></div>
+</div>
+<div class="card visual-yes">
+<div class="card-header"><span class="card-id">ITEM-20260407-0001</span><span class="badge badge-gen">ai</span><span class="add">+85</span></div>
+<span class="archetype">blocked-handoff</span>
+<div class="card-title">Most AI workflows look smart until you have to run them twice.Demo automation is easy. Rel #1</div>
+<img src="./images/ITEM-20260407-0001/ITEM-20260407-0001-visual.jpg" />
+<div class="card-meta"><span>QA: 5</span><span>x</span></div>
+</div>
+<div class="card visual-no">
+<div class="card-header"><span class="card-id">ITEM-20260406-0027</span><span class="badge badge-skip">no-visual</span><span class="add">+0</span></div>
+<div class="card-title">If your workflow ignores The &#x27;First 90 Days of AI Implementation&#x27; for Ecommerce: No one is #3</div>
+<div class="card-meta"><span>QA: 4</span><span>x</span></div>
+</div>
+<div class="card visual-no">
+<div class="card-header"><span class="card-id">ITEM-20260406-0026</span><span class="badge badge-skip">no-visual</span><span class="add">+0</span></div>
+<div class="card-title">Most people miss the Why in this.Why most &#x27;opportunities&#x27; in building share the same failu #2</div>
+<div class="card-meta"><span>QA: 5</span><span>x</span></div>
+</div>
+<div class="card visual-no">
+<div class="card-header"><span class="card-id">ITEM-20260406-0025</span><span class="badge badge-skip">no-visual</span><span class="add">+0</span></div>
+<div class="card-title">Most AI workflows look smart until you have to run them twice.Demo automation is easy. Rel #1</div>
+<div class="card-meta"><span>QA: 5</span><span>x</span></div>
+</div>
+<div class="card visual-no">
+<div class="card-header"><span class="card-id">ITEM-20260406-0024</span><span class="badge badge-skip">no-visual</span><span class="add">+35</span></div>
+<div class="card-title">If your workflow ignores The &#x27;First 90 Days of AI Implementation&#x27; for Ecommerce: No one is #3</div>
+<div class="card-meta"><span>QA: 5</span><span>x</span></div>
+</div>
+<div class="card visual-no">
+<div class="card-header"><span class="card-id">ITEM-20260406-0014</span><span class="badge badge-skip">no-visual</span><span class="add">+0</span></div>
+<div class="card-title">Prompt that got me to [result] on the first try. Worth saving. #2</div>
+<div class="card-meta"><span>QA: 4</span><span>x</span></div>
+</div>
+<div class="card visual-yes">
+<div class="card-header"><span class="card-id">ITEM-20260406-0011</span><span class="badge badge-gen">ai</span><span class="add">+0</span></div>
+<div class="card-title">The difference between a demo automation and a reliable operating system #2</div>
+<img src="./images/ITEM-20260406-0011/ITEM-20260406-0011-visual.jpg" />
+<div class="card-meta"><span>QA: 4</span><span>x</span></div>
+</div>
+</div></body></html>
