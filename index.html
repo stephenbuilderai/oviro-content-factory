@@ -1,155 +1,1301 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><title>Oviro Content Factory</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Content Factory</title>
 <style>
-*{box-sizing:border-box}body{font-family:system-ui;background:#0a0a0b;color:#e5e5e5;padding:24px;margin:0}
-h1{color:#fff;margin:0 0 4px}h2{color:#666;font-size:14px;font-weight:400;margin:0 0 28px}
-.banner{background:#1a1a2a;border:1px solid #2a2a4a;border-radius:8px;padding:12px 16px;margin-bottom:24px;font-size:13px;color:#a5b4fc}
-.stats{display:flex;gap:16px;margin-bottom:32px;flex-wrap:wrap}
-.stat{background:#141414;border:1px solid #222;border-radius:8px;padding:12px 20px}
-.stat .num{font-size:24px;font-weight:700;color:#fff}
-.stat .label{font-size:11px;color:#555;text-transform:uppercase;letter-spacing:.5px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:20px}
-.card{background:#141414;border:1px solid #222;border-radius:12px;padding:18px}
-.card-header{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
-.card-id{font-size:11px;color:#555;font-family:monospace}
-.badge{padding:2px 8px;border-radius:12px;font-size:10px;font-weight:500}
-.badge-unsplash{background:#1a1a2a;color:#a5b4fc}.badge-wm{background:#1a2a1a;color:#6ee7b7}
-.badge-ai{background:#2a1a1a;color:#f87171}.badge-skip{background:#1a1a1a;color:#444}
-.card-title{font-size:14px;line-height:1.45;color:#bbb;margin:10px 0 8px}
-.card img{width:100%;border-radius:6px;margin-top:10px;border:1px solid #2a2a2a;max-height:220px;object-fit:cover}
-.card-meta{font-size:11px;color:#444;margin-top:10px;display:flex;gap:12px}
-.visual-yes{border-left:3px solid #22c55e}.visual-no{border-left:3px solid #333}
-.add{font-size:11px;color:#555}
-</style></head><body>
-<h1>Oviro Content Factory</h1>
-<h2>personal-brand lane · Andre · X/Twitter</h2>
-<div class="banner"><b>Unsplash live:</b> real-image search now primary (50 req/day) → Wikimedia free fallback → Gemini AI last resort</div>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #0d1117;
+  color: #e6edf3;
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 16px 12px 60px;
+}
+.wrap { max-width: 680px; margin: 0 auto; }
+.head { margin-bottom: 14px; }
+.head h1 { font-size: 18px; color: #58a6ff; font-weight: 700; }
+.head .ts { font-size: 11px; color: #484f58; margin-top: 2px; }
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 12px; }
+.stat { background: #161b22; border: 1px solid #21262d; border-radius: 6px; padding: 8px 6px; text-align: center; }
+.stat-num { font-size: 20px; font-weight: 700; color: #58a6ff; }
+.stat-lbl { font-size: 10px; color: #484f58; text-transform: uppercase; letter-spacing: 0.5px; }
+.actions { display: flex; gap: 6px; margin-bottom: 8px; flex-wrap: wrap; }
+.mobile-note { font-size: 11px; color: #484f58; margin-bottom: 14px; line-height: 1.5; }
+.btn { display: inline-flex; align-items: center; gap: 4px; padding: 6px 12px; border-radius: 5px; font-size: 12px; font-weight: 500; cursor: pointer; border: none; }
+.btn-copy { background: #238636; color: #fff; }
+.btn-copy:hover { background: #2ea043; }
+.btn-copy.copied { background: #196c2e; }
+.btn-dl { background: #21262d; color: #8b949e; border: 1px solid #30363d; text-decoration: none; }
+.btn-dl:hover { background: #30363d; color: #e6edf3; }
+.btn-ghost { background: #21262d; color: #8b949e; border: 1px solid #30363d; }
+.btn-ghost:hover { background: #30363d; color: #e6edf3; }
+.lbl { font-size: 10px; text-transform: uppercase; letter-spacing: 0.8px; color: #484f58; margin-bottom: 8px; margin-top: 16px; border-bottom: 1px solid #161b22; padding-bottom: 4px; }
+.card { background: #161b22; border: 1px solid #21262d; border-radius: 7px; margin-bottom: 8px; overflow: hidden; }
+.card-head { padding: 8px 10px; border-bottom: 1px solid #21262d; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.card-title { font-size: 13px; font-weight: 600; color: #e6edf3; flex: 1; min-width: 180px; }
+.card-body { padding: 8px 10px; }
+.card-foot { padding: 6px 10px; background: #0d1117; border-top: 1px solid #161b22; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.card-meta { font-size: 10px; color: #30363d; margin-left: auto; }
+.ch, .st { display: inline-block; padding: 1px 6px; border-radius: 10px; font-size: 10px; font-weight: 600; white-space: nowrap; }
+.ch-linkedin { background: #0a66c2; color: #fff; }
+.ch-x, .ch-twitter { background: #000; color: #fff; border: 1px solid #333; }
+.st-review { background: #9e6a03; color: #fff; }
+.st-ok { background: #1f6feb; color: #fff; }
+.st-muted { background: #30363d; color: #8b949e; }
+.draft-ta {
+  width: 100%;
+  font-family: inherit;
+  font-size: 12px;
+  color: #8b949e;
+  background: #0d1117;
+  border: 1px solid #21262d;
+  border-radius: 4px;
+  padding: 7px 8px;
+  margin-bottom: 6px;
+  resize: none;
+  line-height: 1.55;
+  cursor: text;
+  -webkit-user-select: text;
+  user-select: text;
+}
+.draft-ta.copied {
+  border-color: #238636;
+  background: #0d1117;
+}
+.draft-ta::-webkit-scrollbar { width: 4px; }
+.draft-ta::-webkit-scrollbar-thumb { background: #30363d; border-radius: 2px; }
+.hooks { margin-bottom: 4px; }
+.hook { font-size: 11px; color: #79c0ff; line-height: 1.6; }
+.cta { font-size: 11px; color: #484f58; font-style: italic; margin-top: 4px; }
+.img-block { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+.thumb { width: 72px; height: 72px; object-fit: cover; border-radius: 4px; border: 1px solid #30363d; display: block; flex-shrink: 0; }
+.empty { text-align: center; padding: 32px 16px; background: #161b22; border: 1px dashed #30363d; border-radius: 7px; color: #484f58; font-size: 13px; }
+.empty strong { color: #8b949e; display: block; margin-bottom: 4px; }
+.sys { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; font-size: 11px; }
+.sys-card { background: #161b22; border: 1px solid #21262d; border-radius: 6px; padding: 8px 10px; }
+.sys-item { display: flex; align-items: center; gap: 5px; margin-bottom: 4px; line-height: 1.4; }
+.sys-item:last-child { margin-bottom: 0; }
+.dot-ok { color: #238636; }
+.dot-err { color: #da3633; }
+.dot-warn { color: #9e6a03; }
+.todo { background: #161b22; border-left: 3px solid #9e6a03; border-radius: 0 6px 6px 0; padding: 10px 12px; font-size: 12px; }
+.todo ol { padding-left: 16px; }
+.todo li { margin-bottom: 4px; color: #8b949e; }
+.todo li strong { color: #e6edf3; }
+@media (max-width: 480px) { .stats { grid-template-columns: repeat(2, 1fr); } .sys { grid-template-columns: 1fr; } .card-meta { display: none; } }
+@media print { .actions, .card-foot { display: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="head">
+<h1>Andre's Content Factory</h1>
+<div class="ts">2026-04-11 10:31 &middot; 48 items &middot; Personal Brand</div>
+</div>
+
 <div class="stats">
-<div class="stat"><div class="num">48</div><div class="label">Total Items</div></div>
-<div class="stat"><div class="num">29</div><div class="label">In Review</div></div>
-<div class="stat"><div class="num">16</div><div class="label">Images on Disk</div></div>
+<div class="stat"><div class="stat-num">48</div><div class="stat-lbl">Total</div></div>
+<div class="stat"><div class="stat-num">29</div><div class="stat-lbl">Review</div></div>
+<div class="stat"><div class="stat-num">0</div><div class="stat-lbl">Scheduled</div></div>
+<div class="stat"><div class="stat-num">13</div><div class="stat-lbl">Images</div></div>
 </div>
-<div class="grid">
-<div class="card visual-no">
-<div class="card-header"><span class="card-id">ITEM-20260407-0021</span><span class="badge badge-skip">no-visual</span><span class="add">+0</span></div>
-<div class="card-title">4 hours debugging an agent loop. Bug was a missing newline in prompt config. That&#x27;s it.</div>
-<div class="card-meta"><span>QA: 5</span><span>x</span></div>
+
+<div class="actions">
+<button class="btn btn-copy" id="copy-all-btn" onclick="copyAllDrafts()">&#10022; Copy all drafts</button>
+<button class="btn btn-ghost" onclick="window.location.reload()">&#8635; Refresh</button>
 </div>
-<div class="card visual-no">
-<div class="card-header"><span class="card-id">ITEM-20260407-0020</span><span class="badge badge-skip">no-visual</span><span class="add">+0</span></div>
-<div class="card-title">4 hours debugging an agent loop. Missing newline in prompt config. That&#x27;s it.</div>
-<div class="card-meta"><span>QA: 5</span><span>x</span></div>
+<div class="mobile-note">&#128247; <strong>On mobile:</strong> tap the green text box below any item to select all, then tap Copy. Or tap and hold a green button to copy.</div>
+
+<div class="lbl">Content Queue</div>
+<div class="card">
+<div class="card-head">
+<span class="card-title">My Sachbearbeiter job: document everything. Boring. But it means I don&#39;t miss steps buildi #3</span>
+<span class="ch ch-x">x</span><span class="st st-review">review</span>
 </div>
-<div class="card visual-no">
-<div class="card-header"><span class="card-id">ITEM-20260407-0019</span><span class="badge badge-skip">no-visual</span><span class="add">+0</span></div>
-<div class="card-title">4 hours debugging an agent loop. Missing newline in prompt config. That&#x27;s it.</div>
-<div class="card-meta"><span>QA: 5</span><span>x</span></div>
+<div class="card-body">
+<textarea class="draft-ta" readonly rows="8" onclick="taSelectCopy(this)">My Sachbearbeiter job: document everything. Boring. But it means I don&#39;t miss steps building Oviro at 11 PM. Consistency win.
+
+What keeps standing out to me is that the interesting part of AI is not the demo. It&#39;s the operating model behind it.
+
+That usually comes down to boring but decisive questions:
+- who owns the step
+- what breaks on repetition
+- where manual review still belongs
+- what tradeoff you&#39;re making between speed, cost, and reliability
+
+Recent example: Real systems break in boring ways first.
+
+That&#39;s why I pay more attention to constraints, routing, and review loops than to shiny automation clips.
+
+If a workflow only looks good once, it isn&#39;t ready yet.</textarea>
+<div class="hooks"><span class="hook">&#8594; My Sachbearbeiter job: document everything. Boring. But it means I don&#39;t miss st</span></div>
+<div class="cta">&#8594; CTA: Anyone else find unexpected skills from their day job useful?</div>
+
 </div>
-<div class="card visual-no">
-<div class="card-header"><span class="card-id">ITEM-20260407-0018</span><span class="badge badge-skip">no-visual</span><span class="add">+0</span></div>
-<div class="card-title">Spent 4 hours debugging an agent loop. The bug? A missing newline in the prompt config. Th</div>
-<div class="card-meta"><span>QA: 5</span><span>x</span></div>
+<div class="card-foot">
+<button class="btn btn-copy" data-copy="My Sachbearbeiter job: document everything. Boring. But it means I don't miss steps building Oviro at 11 PM. Consistency win.\n\nWhat keeps standing out to me is that the interesting part of AI is not the demo. It's the operating model behind it.\n\nThat usually comes down to boring but decisive questions:\n- who owns the step\n- what breaks on repetition\n- where manual review still belongs\n- what tradeoff you're making between speed, cost, and reliability\n\nRecent example: Real systems break in boring ways first.\n\nThat's why I pay more attention to constraints, routing, and review loops than to shiny automation clips.\n\nIf a workflow only looks good once, it isn't ready yet." onclick="cpyBtn(this)">&#10022; Copy draft</button>
+<button class="btn btn-copy" data-copy="My Sachbearbeiter job: document everything. Boring. But it means I don't miss st" onclick="cpyBtn(this)">&#10022; Copy hooks</button>
+<span class="card-meta">ITEM-20260407-0010 &middot; 2026-04-10T13:06</span>
 </div>
-<div class="card visual-no">
-<div class="card-header"><span class="card-id">ITEM-20260407-0017</span><span class="badge badge-skip">no-visual</span><span class="add">+0</span></div>
-<div class="card-title">4 hours debugging an agent loop. Missing newline in prompt config. That&#x27;s it.</div>
-<div class="card-meta"><span>QA: 5</span><span>x</span></div>
 </div>
-<div class="card visual-no">
-<div class="card-header"><span class="card-id">ITEM-20260407-0016</span><span class="badge badge-skip">no-visual</span><span class="add">+0</span></div>
-<div class="card-title">Spent 4 hours debugging an agent loop. The bug? A missing newline in the prompt config. Th</div>
-<div class="card-meta"><span>QA: 5</span><span>x</span></div>
+<div class="card">
+<div class="card-head">
+<span class="card-title">Most AI workflows look smart until you have to run them twice.Demo automation is easy. Rel #1</span>
+<span class="ch ch-x">x</span><span class="st st-review">review</span>
 </div>
-<div class="card visual-no">
-<div class="card-header"><span class="card-id">ITEM-20260407-0015</span><span class="badge badge-skip">no-visual</span><span class="add">+0</span></div>
-<div class="card-title">4 hours debugging an agent loop. Missing newline in prompt config. That&#x27;s it. #1</div>
-<div class="card-meta"><span>QA: 5</span><span>x</span></div>
+<div class="card-body">
+<textarea class="draft-ta" readonly rows="4" onclick="taSelectCopy(this)">Most AI workflows look smart until you have to run them twice.Demo automation is easy. Reliable workflow design is the hard part.I learned this while building and debugging real systems.Spent 4 hours debugging an agent loop. The bug was a missing newline in a config. That&#39;s it.Build for repeatability, not applause.</textarea>
+<div class="hooks"><span class="hook">&#8594; Most AI workflows look smart until you have to run them twice.</span><br><span class="hook">&#8594; The gap between a demo and a reliable system is where most AI projects quietly die.</span><br><span class="hook">&#8594; If your workflow ignores Brand voice frameworks for AI content — how to maintain authentic voice when AI is generating at scale; train AI with your tone/style, it probably isn&#39;t ready yet.</span></div>
+<div class="cta">&#8594; CTA: What keeps breaking in your workflows?</div>
+<div class="img-block">
+<img src="/data/.openclaw/workspace/growth/content-factory/assets/images/ITEM-20260407-0001/ITEM-20260407-0001-visual.jpg" class="thumb" alt="visual">
+<a href="/data/.openclaw/workspace/growth/content-factory/assets/images/ITEM-20260407-0001/ITEM-20260407-0001-visual.jpg" download="ITEM-20260407-0001-visual.jpg" class="btn btn-dl">&#11015; Download image</a>
 </div>
-<div class="card visual-no">
-<div class="card-header"><span class="card-id">ITEM-20260407-0014</span><span class="badge badge-skip">no-visual</span><span class="add">+0</span></div>
-<div class="card-title">4 hours debugging an agent loop. Missing newline in prompt config. That&#x27;s it. #1</div>
-<div class="card-meta"><span>QA: 5</span><span>x</span></div>
 </div>
-<div class="card visual-no">
-<div class="card-header"><span class="card-id">ITEM-20260407-0013</span><span class="badge badge-skip">no-visual</span><span class="add">+10</span></div>
-<div class="card-title">Corporate admin by day, AI builder by night. The mental switch is wild. Sometimes I wonder #3</div>
-<div class="card-meta"><span>QA: 5</span><span>x</span></div>
+<div class="card-foot">
+<button class="btn btn-copy" data-copy="Most AI workflows look smart until you have to run them twice.Demo automation is easy. Reliable workflow design is the hard part.I learned this while building and debugging real systems.Spent 4 hours debugging an agent loop. The bug was a missing newline in a config. That's it.Build for repeatability, not applause." onclick="cpyBtn(this)">&#10022; Copy draft</button>
+<button class="btn btn-copy" data-copy="Most AI workflows look smart until you have to run them twice. | The gap between a demo and a reliable system is where most AI projects quietly die. | If your workflow ignores Brand voice frameworks for AI content — how to maintain authentic voice when AI is generating at scale; train AI with your tone/style, it probably isn't ready yet." onclick="cpyBtn(this)">&#10022; Copy hooks</button>
+<span class="card-meta">ITEM-20260407-0001 &middot; 2026-04-10T08:03</span>
 </div>
-<div class="card visual-no">
-<div class="card-header"><span class="card-id">ITEM-20260407-0012</span><span class="badge badge-skip">no-visual</span><span class="add">+0</span></div>
-<div class="card-title">Chasing the latest AI tool for my side project? It&#x27;s an asymmetric downside trade. Huge ti #2</div>
-<div class="card-meta"><span>QA: 5</span><span>x</span></div>
 </div>
-<div class="card visual-no">
-<div class="card-header"><span class="card-id">ITEM-20260407-0011</span><span class="badge badge-skip">no-visual</span><span class="add">+10</span></div>
-<div class="card-title">4 hours debugging an agent loop. Missing newline in prompt config. That&#x27;s it. #1</div>
-<div class="card-meta"><span>QA: 5</span><span>x</span></div>
+<div class="card">
+<div class="card-head">
+<span class="card-title">Prompt that got me to [result] on the first try. Worth saving. #2</span>
+<span class="ch ch-x">x</span><span class="st st-review">review</span>
 </div>
-<div class="card visual-no">
-<div class="card-header"><span class="card-id">ITEM-20260407-0010</span><span class="badge badge-skip">no-visual</span><span class="add">+52</span></div>
-<div class="card-title">My Sachbearbeiter job: document everything. Boring. But it means I don&#x27;t miss steps buildi #3</div>
-<div class="card-meta"><span>QA: 5</span><span>x</span></div>
+<div class="card-body">
+<textarea class="draft-ta" readonly rows="8" onclick="taSelectCopy(this)">The gap between a demo and a reliable system is where most AI projects quietly die.
+
+Too much AI content skips ownership, review loops, and constraints.
+
+I learned this while building and debugging real systems.
+
+Prompt that got me to [result] on the first try. Worth saving.
+
+That&#39;s where the real work is.</textarea>
+<div class="hooks"><span class="hook">&#8594; Most AI workflows look smart until you have to run them twice.</span><br><span class="hook">&#8594; The gap between a demo and a reliable system is where most AI projects quietly die.</span><br><span class="hook">&#8594; If your workflow ignores The &#39;First 90 Days of AI Implementation&#39; for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the &#39;AI backlash&#39; audience is actively seeking. Oviro&#39;s positioning as an &#39;intelligence layer&#39; fits perfectly here., it probably isn&#39;t ready yet.</span></div>
+<div class="cta">&#8594; CTA: What keeps breaking in your workflows?</div>
+<div class="img-block">
+<img src="/data/.openclaw/workspace/growth/content-factory/assets/images/ITEM-20260406-0014/ITEM-20260406-0014-visual.jpg" class="thumb" alt="visual">
+<a href="/data/.openclaw/workspace/growth/content-factory/assets/images/ITEM-20260406-0014/ITEM-20260406-0014-visual.jpg" download="ITEM-20260406-0014-visual.jpg" class="btn btn-dl">&#11015; Download image</a>
 </div>
-<div class="card visual-no">
-<div class="card-header"><span class="card-id">ITEM-20260407-0008</span><span class="badge badge-skip">no-visual</span><span class="add">+10</span></div>
-<div class="card-title">4 hours debugging an agent loop. The bug: a missing newline in the prompt config. That&#x27;s i #1</div>
-<div class="card-meta"><span>QA: 4</span><span>x</span></div>
 </div>
-<div class="card visual-no">
-<div class="card-header"><span class="card-id">ITEM-20260407-0007</span><span class="badge badge-skip">no-visual</span><span class="add">+0</span></div>
-<div class="card-title">My Sachbearbeiter job in Switzerland taught me something unexpected for Oviro: the grind o #3</div>
-<div class="card-meta"><span>QA: 4</span><span>x</span></div>
+<div class="card-foot">
+<button class="btn btn-copy" data-copy="The gap between a demo and a reliable system is where most AI projects quietly die.\n\nToo much AI content skips ownership, review loops, and constraints.\n\nI learned this while building and debugging real systems.\n\nPrompt that got me to [result] on the first try. Worth saving.\n\nThat's where the real work is." onclick="cpyBtn(this)">&#10022; Copy draft</button>
+<button class="btn btn-copy" data-copy="Most AI workflows look smart until you have to run them twice. | The gap between a demo and a reliable system is where most AI projects quietly die. | If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn't ready yet." onclick="cpyBtn(this)">&#10022; Copy hooks</button>
+<span class="card-meta">ITEM-20260406-0014 &middot; 2026-04-09T14:05</span>
 </div>
-<div class="card visual-no">
-<div class="card-header"><span class="card-id">ITEM-20260407-0005</span><span class="badge badge-skip">no-visual</span><span class="add">+0</span></div>
-<div class="card-title">Spent [4 hours] debugging an agent loop. The bug was [a missing newline in a config]. That #1</div>
-<div class="card-meta"><span>QA: 4</span><span>x</span></div>
 </div>
-<div class="card visual-no">
-<div class="card-header"><span class="card-id">ITEM-20260407-0003</span><span class="badge badge-skip">no-visual</span><span class="add">+0</span></div>
-<div class="card-title">Most people miss the Why in this.Why most &#x27;opportunities&#x27; in building share the same failu #2</div>
-<div class="card-meta"><span>QA: 5</span><span>x</span></div>
+<div class="card">
+<div class="card-head">
+<span class="card-title">If your workflow ignores The &#39;First 90 Days of AI Implementation&#39; for Ecommerce: No one is #3</span>
+<span class="ch ch-x">x</span><span class="st st-review">review</span>
 </div>
-<div class="card visual-no">
-<div class="card-header"><span class="card-id">ITEM-20260407-0002</span><span class="badge badge-skip">no-visual</span><span class="add">+0</span></div>
-<div class="card-title">Most AI workflows look smart until you have to run them twice. #1</div>
-<div class="card-meta"><span>QA: 5</span><span>x</span></div>
+<div class="card-body">
+<textarea class="draft-ta" readonly rows="8" onclick="taSelectCopy(this)">If your workflow ignores The &#39;First 90 Days of AI Implementation&#39; for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the &#39;AI backlash&#39; audience is actively seeking. Oviro&#39;s positioning as an &#39;intelligence layer&#39; fits perfectly here., it probably isn&#39;t ready yet.Interesting systems are less about novelty and more about what survives friction.I learned this while building and debugging real systems.What my day job taught me about systems thinking that I use in buildingThat&#39;s the part worth talking about.
+
+What keeps standing out to me is that the interesting part of AI is not the demo. It&#39;s the operating model behind it.
+
+That usually comes down to boring but decisive questions:
+- who owns the step
+- what breaks on repetition
+- where manual review still belongs
+- what tradeoff you&#39;re making between speed, cost, and reliability
+
+Recent example: Real systems break in boring ways first.
+
+That&#39;s why I pay more attention to constraints, routing, and review loops than to shiny automation clips.
+
+If a workflow only looks good once, it isn&#39;t ready yet.</textarea>
+<div class="hooks"><span class="hook">&#8594; Most AI workflows look smart until you have to run them twice.</span><br><span class="hook">&#8594; The gap between a demo and a reliable system is where most AI projects quietly die.</span><br><span class="hook">&#8594; If your workflow ignores The &#39;First 90 Days of AI Implementation&#39; for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the &#39;AI backlash&#39; audience is actively seeking. Oviro&#39;s positioning as an &#39;intelligence layer&#39; fits perfectly here., it probably isn&#39;t ready yet.</span></div>
+<div class="cta">&#8594; CTA: What keeps breaking in your workflows?</div>
+<div class="img-block">
+<img src="/data/.openclaw/workspace/growth/content-factory/assets/images/ITEM-20260406-0024/ITEM-20260406-0024-visual.jpg" class="thumb" alt="visual">
+<a href="/data/.openclaw/workspace/growth/content-factory/assets/images/ITEM-20260406-0024/ITEM-20260406-0024-visual.jpg" download="ITEM-20260406-0024-visual.jpg" class="btn btn-dl">&#11015; Download image</a>
 </div>
-<div class="card visual-yes">
-<div class="card-header"><span class="card-id">ITEM-20260407-0001</span><span class="badge badge-ai">ai</span><span class="add">+85</span></div>
-<span class="archetype">blocked-handoff</span>
-<div class="card-title">Most AI workflows look smart until you have to run them twice.Demo automation is easy. Rel #1</div>
-<img src="./images/ITEM-20260407-0001/ITEM-20260407-0001-visual.jpg" />
-<div class="card-meta"><span>QA: 5</span><span>x</span></div>
 </div>
-<div class="card visual-no">
-<div class="card-header"><span class="card-id">ITEM-20260406-0027</span><span class="badge badge-skip">no-visual</span><span class="add">+0</span></div>
-<div class="card-title">If your workflow ignores The &#x27;First 90 Days of AI Implementation&#x27; for Ecommerce: No one is #3</div>
-<div class="card-meta"><span>QA: 4</span><span>x</span></div>
+<div class="card-foot">
+<button class="btn btn-copy" data-copy="If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn't ready yet.Interesting systems are less about novelty and more about what survives friction.I learned this while building and debugging real systems.What my day job taught me about systems thinking that I use in buildingThat's the part worth talking about.\n\nWhat keeps standing out to me is that the interesting part of AI is not the demo. It's the operating model behind it.\n\nThat usually comes down to boring but decisive questions:\n- who owns the step\n- what breaks on repetition\n- where manual review still belongs\n- what tradeoff you're making between speed, cost, and reliability\n\nRecent example: Real systems break in boring ways first.\n\nThat's why I pay more attention to constraints, routing, and review loops than to shiny automation clips.\n\nIf a workflow only looks good once, it isn't ready yet." onclick="cpyBtn(this)">&#10022; Copy draft</button>
+<button class="btn btn-copy" data-copy="Most AI workflows look smart until you have to run them twice. | The gap between a demo and a reliable system is where most AI projects quietly die. | If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn't ready yet." onclick="cpyBtn(this)">&#10022; Copy hooks</button>
+<span class="card-meta">ITEM-20260406-0024 &middot; 2026-04-09T14:05</span>
 </div>
-<div class="card visual-no">
-<div class="card-header"><span class="card-id">ITEM-20260406-0026</span><span class="badge badge-skip">no-visual</span><span class="add">+0</span></div>
-<div class="card-title">Most people miss the Why in this.Why most &#x27;opportunities&#x27; in building share the same failu #2</div>
-<div class="card-meta"><span>QA: 5</span><span>x</span></div>
 </div>
-<div class="card visual-no">
-<div class="card-header"><span class="card-id">ITEM-20260406-0025</span><span class="badge badge-skip">no-visual</span><span class="add">+0</span></div>
-<div class="card-title">Most AI workflows look smart until you have to run them twice.Demo automation is easy. Rel #1</div>
-<div class="card-meta"><span>QA: 5</span><span>x</span></div>
+<div class="card">
+<div class="card-head">
+<span class="card-title">Most AI workflows look smart until you have to run them twice.Demo automation is easy. Rel #1</span>
+<span class="ch ch-x">x</span><span class="st st-review">review</span>
 </div>
-<div class="card visual-no">
-<div class="card-header"><span class="card-id">ITEM-20260406-0024</span><span class="badge badge-skip">no-visual</span><span class="add">+35</span></div>
-<div class="card-title">If your workflow ignores The &#x27;First 90 Days of AI Implementation&#x27; for Ecommerce: No one is #3</div>
-<div class="card-meta"><span>QA: 5</span><span>x</span></div>
+<div class="card-body">
+<textarea class="draft-ta" readonly rows="4" onclick="taSelectCopy(this)">Most AI workflows look smart until you have to run them twice.Demo automation is easy. Reliable workflow design is the hard part.I learned this while building and debugging real systems.Spent 4 hours debugging an agent loop. The bug was a missing newline in a config. That&#39;s it.Build for repeatability, not applause.</textarea>
+<div class="hooks"><span class="hook">&#8594; Most AI workflows look smart until you have to run them twice.</span><br><span class="hook">&#8594; The gap between a demo and a reliable system is where most AI projects quietly die.</span><br><span class="hook">&#8594; If your workflow ignores The &#39;First 90 Days of AI Implementation&#39; for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the &#39;AI backlash&#39; audience is actively seeking. Oviro&#39;s positioning as an &#39;intelligence layer&#39; fits perfectly here., it probably isn&#39;t ready yet.</span></div>
+<div class="cta">&#8594; CTA: What keeps breaking in your workflows?</div>
+<div class="img-block">
+<img src="/data/.openclaw/workspace/growth/content-factory/assets/images/ITEM-20260406-0025/ITEM-20260406-0025-visual.jpg" class="thumb" alt="visual">
+<a href="/data/.openclaw/workspace/growth/content-factory/assets/images/ITEM-20260406-0025/ITEM-20260406-0025-visual.jpg" download="ITEM-20260406-0025-visual.jpg" class="btn btn-dl">&#11015; Download image</a>
 </div>
-<div class="card visual-no">
-<div class="card-header"><span class="card-id">ITEM-20260406-0014</span><span class="badge badge-skip">no-visual</span><span class="add">+0</span></div>
-<div class="card-title">Prompt that got me to [result] on the first try. Worth saving. #2</div>
-<div class="card-meta"><span>QA: 4</span><span>x</span></div>
 </div>
-<div class="card visual-yes">
-<div class="card-header"><span class="card-id">ITEM-20260406-0011</span><span class="badge badge-ai">ai</span><span class="add">+0</span></div>
-<div class="card-title">The difference between a demo automation and a reliable operating system #2</div>
-<img src="./images/ITEM-20260406-0011/ITEM-20260406-0011-visual.jpg" />
-<div class="card-meta"><span>QA: 4</span><span>x</span></div>
+<div class="card-foot">
+<button class="btn btn-copy" data-copy="Most AI workflows look smart until you have to run them twice.Demo automation is easy. Reliable workflow design is the hard part.I learned this while building and debugging real systems.Spent 4 hours debugging an agent loop. The bug was a missing newline in a config. That's it.Build for repeatability, not applause." onclick="cpyBtn(this)">&#10022; Copy draft</button>
+<button class="btn btn-copy" data-copy="Most AI workflows look smart until you have to run them twice. | The gap between a demo and a reliable system is where most AI projects quietly die. | If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn't ready yet." onclick="cpyBtn(this)">&#10022; Copy hooks</button>
+<span class="card-meta">ITEM-20260406-0025 &middot; 2026-04-09T14:05</span>
 </div>
-</div></body></html>
+</div>
+<div class="card">
+<div class="card-head">
+<span class="card-title">The difference between a demo automation and a reliable operating system #2</span>
+<span class="ch ch-x">x</span><span class="st st-review">review</span>
+</div>
+<div class="card-body">
+<textarea class="draft-ta" readonly rows="8" onclick="taSelectCopy(this)">The gap between a demo and a reliable system is where most AI projects quietly die.
+
+Too much AI content skips ownership, review loops, and constraints.
+
+I learned this while building and debugging real systems.
+
+The difference between a demo automation and a reliable operating system
+
+That’s where the real work is.</textarea>
+<div class="hooks"><span class="hook">&#8594; Most AI workflows look smart until you have to run them twice.</span><br><span class="hook">&#8594; The gap between a demo and a reliable system is where most AI projects quietly die.</span><br><span class="hook">&#8594; If your workflow ignores The &#39;First 90 Days of AI Implementation&#39; for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the &#39;AI backlash&#39; audience is actively seeking. Oviro&#39;s positioning as an &#39;intelligence layer&#39; fits perfectly here., it probably isn’t ready yet.</span></div>
+<div class="cta">&#8594; CTA: Invite operators/builders to reply with what keeps breaking in their workflows.</div>
+<div class="img-block">
+<img src="/data/.openclaw/workspace/growth/content-factory/assets/images/ITEM-20260406-0008/ITEM-20260406-0008-visual.jpg" class="thumb" alt="visual">
+<a href="/data/.openclaw/workspace/growth/content-factory/assets/images/ITEM-20260406-0008/ITEM-20260406-0008-visual.jpg" download="ITEM-20260406-0008-visual.jpg" class="btn btn-dl">&#11015; Download image</a>
+</div>
+</div>
+<div class="card-foot">
+<button class="btn btn-copy" data-copy="The gap between a demo and a reliable system is where most AI projects quietly die.\n\nToo much AI content skips ownership, review loops, and constraints.\n\nI learned this while building and debugging real systems.\n\nThe difference between a demo automation and a reliable operating system\n\nThat’s where the real work is." onclick="cpyBtn(this)">&#10022; Copy draft</button>
+<button class="btn btn-copy" data-copy="Most AI workflows look smart until you have to run them twice. | The gap between a demo and a reliable system is where most AI projects quietly die. | If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn’t ready yet." onclick="cpyBtn(this)">&#10022; Copy hooks</button>
+<span class="card-meta">ITEM-20260406-0008 &middot; 2026-04-09T08:03</span>
+</div>
+</div>
+<div class="card">
+<div class="card-head">
+<span class="card-title">What broke in a multi-agent setup and what the fix taught me #1</span>
+<span class="ch ch-x">x</span><span class="st st-review">review</span>
+</div>
+<div class="card-body">
+<textarea class="draft-ta" readonly rows="8" onclick="taSelectCopy(this)">Most AI workflows look smart until you have to run them twice.
+
+Demo automation is easy. Reliable workflow design is the hard part.
+
+I learned this while building and debugging real systems.
+
+What broke in a multi-agent setup and what the fix taught me
+
+Build for repeatability, not applause.</textarea>
+<div class="hooks"><span class="hook">&#8594; Most AI workflows look smart until you have to run them twice.</span><br><span class="hook">&#8594; The gap between a demo and a reliable system is where most AI projects quietly die.</span><br><span class="hook">&#8594; If your workflow ignores The &#39;First 90 Days of AI Implementation&#39; for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the &#39;AI backlash&#39; audience is actively seeking. Oviro&#39;s positioning as an &#39;intelligence layer&#39; fits perfectly here., it probably isn’t ready yet.</span></div>
+<div class="cta">&#8594; CTA: Invite operators/builders to reply with what keeps breaking in their workflows.</div>
+<div class="img-block">
+<img src="/data/.openclaw/workspace/growth/content-factory/assets/images/ITEM-20260406-0010/ITEM-20260406-0010-visual.jpg" class="thumb" alt="visual">
+<a href="/data/.openclaw/workspace/growth/content-factory/assets/images/ITEM-20260406-0010/ITEM-20260406-0010-visual.jpg" download="ITEM-20260406-0010-visual.jpg" class="btn btn-dl">&#11015; Download image</a>
+</div>
+</div>
+<div class="card-foot">
+<button class="btn btn-copy" data-copy="Most AI workflows look smart until you have to run them twice.\n\nDemo automation is easy. Reliable workflow design is the hard part.\n\nI learned this while building and debugging real systems.\n\nWhat broke in a multi-agent setup and what the fix taught me\n\nBuild for repeatability, not applause." onclick="cpyBtn(this)">&#10022; Copy draft</button>
+<button class="btn btn-copy" data-copy="Most AI workflows look smart until you have to run them twice. | The gap between a demo and a reliable system is where most AI projects quietly die. | If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn’t ready yet." onclick="cpyBtn(this)">&#10022; Copy hooks</button>
+<span class="card-meta">ITEM-20260406-0010 &middot; 2026-04-09T08:03</span>
+</div>
+</div>
+<div class="card">
+<div class="card-head">
+<span class="card-title">The difference between a demo automation and a reliable operating system #2</span>
+<span class="ch ch-x">x</span><span class="st st-review">review</span>
+</div>
+<div class="card-body">
+<textarea class="draft-ta" readonly rows="8" onclick="taSelectCopy(this)">The gap between a demo and a reliable system is where most AI projects quietly die.
+
+Too much AI content skips ownership, review loops, and constraints.
+
+I learned this while building and debugging real systems.
+
+The difference between a demo automation and a reliable operating system
+
+That’s where the real work is.</textarea>
+<div class="hooks"><span class="hook">&#8594; Most AI workflows look smart until you have to run them twice.</span><br><span class="hook">&#8594; The gap between a demo and a reliable system is where most AI projects quietly die.</span><br><span class="hook">&#8594; If your workflow ignores The &#39;First 90 Days of AI Implementation&#39; for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the &#39;AI backlash&#39; audience is actively seeking. Oviro&#39;s positioning as an &#39;intelligence layer&#39; fits perfectly here., it probably isn’t ready yet.</span></div>
+<div class="cta">&#8594; CTA: Invite operators/builders to reply with what keeps breaking in their workflows.</div>
+<div class="img-block">
+<img src="/data/.openclaw/workspace/growth/content-factory/assets/images/ITEM-20260406-0011/ITEM-20260406-0011-visual.jpg" class="thumb" alt="visual">
+<a href="/data/.openclaw/workspace/growth/content-factory/assets/images/ITEM-20260406-0011/ITEM-20260406-0011-visual.jpg" download="ITEM-20260406-0011-visual.jpg" class="btn btn-dl">&#11015; Download image</a>
+</div>
+</div>
+<div class="card-foot">
+<button class="btn btn-copy" data-copy="The gap between a demo and a reliable system is where most AI projects quietly die.\n\nToo much AI content skips ownership, review loops, and constraints.\n\nI learned this while building and debugging real systems.\n\nThe difference between a demo automation and a reliable operating system\n\nThat’s where the real work is." onclick="cpyBtn(this)">&#10022; Copy draft</button>
+<button class="btn btn-copy" data-copy="Most AI workflows look smart until you have to run them twice. | The gap between a demo and a reliable system is where most AI projects quietly die. | If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn’t ready yet." onclick="cpyBtn(this)">&#10022; Copy hooks</button>
+<span class="card-meta">ITEM-20260406-0011 &middot; 2026-04-09T08:03</span>
+</div>
+</div>
+<div class="card">
+<div class="card-head">
+<span class="card-title">4 hours debugging an agent loop. Bug was a missing newline in prompt config. That&#39;s it.</span>
+<span class="ch ch-x">x</span><span class="st st-review">review</span>
+</div>
+<div class="card-body">
+<textarea class="draft-ta" readonly rows="4" onclick="taSelectCopy(this)">4 hours debugging an agent loop. Bug was a missing newline in prompt config. That&#39;s it.</textarea>
+<div class="hooks"><span class="hook">&#8594; 4 hours debugging an agent loop. Bug was a missing newline in prompt config. Tha</span></div>
+<div class="cta">&#8594; CTA: Anyone relate?</div>
+
+</div>
+<div class="card-foot">
+<button class="btn btn-copy" data-copy="4 hours debugging an agent loop. Bug was a missing newline in prompt config. That's it." onclick="cpyBtn(this)">&#10022; Copy draft</button>
+<button class="btn btn-copy" data-copy="4 hours debugging an agent loop. Bug was a missing newline in prompt config. Tha" onclick="cpyBtn(this)">&#10022; Copy hooks</button>
+<span class="card-meta">ITEM-20260407-0021 &middot; 2026-04-07T17:58</span>
+</div>
+</div>
+<div class="card">
+<div class="card-head">
+<span class="card-title">4 hours debugging an agent loop. Missing newline in prompt config. That&#39;s it.</span>
+<span class="ch ch-x">x</span><span class="st st-review">review</span>
+</div>
+<div class="card-body">
+<textarea class="draft-ta" readonly rows="4" onclick="taSelectCopy(this)">4 hours debugging an agent loop. Missing newline in prompt config. That&#39;s it.</textarea>
+<div class="hooks"><span class="hook">&#8594; 4 hours debugging an agent loop. Missing newline in prompt config. That&#39;s it.</span></div>
+<div class="cta">&#8594; CTA: Prompt config pain?</div>
+
+</div>
+<div class="card-foot">
+<button class="btn btn-copy" data-copy="4 hours debugging an agent loop. Missing newline in prompt config. That's it." onclick="cpyBtn(this)">&#10022; Copy draft</button>
+<button class="btn btn-copy" data-copy="4 hours debugging an agent loop. Missing newline in prompt config. That's it." onclick="cpyBtn(this)">&#10022; Copy hooks</button>
+<span class="card-meta">ITEM-20260407-0020 &middot; 2026-04-07T17:56</span>
+</div>
+</div>
+<div class="card">
+<div class="card-head">
+<span class="card-title">4 hours debugging an agent loop. Missing newline in prompt config. That&#39;s it.</span>
+<span class="ch ch-x">x</span><span class="st st-review">review</span>
+</div>
+<div class="card-body">
+<textarea class="draft-ta" readonly rows="4" onclick="taSelectCopy(this)">4 hours debugging an agent loop. Missing newline in prompt config. That&#39;s it.</textarea>
+<div class="hooks"><span class="hook">&#8594; 4 hours debugging an agent loop. Missing newline in prompt config. That&#39;s it.</span></div>
+<div class="cta">&#8594; CTA: Prompting pain?</div>
+
+</div>
+<div class="card-foot">
+<button class="btn btn-copy" data-copy="4 hours debugging an agent loop. Missing newline in prompt config. That's it." onclick="cpyBtn(this)">&#10022; Copy draft</button>
+<button class="btn btn-copy" data-copy="4 hours debugging an agent loop. Missing newline in prompt config. That's it." onclick="cpyBtn(this)">&#10022; Copy hooks</button>
+<span class="card-meta">ITEM-20260407-0019 &middot; 2026-04-07T17:55</span>
+</div>
+</div>
+<div class="card">
+<div class="card-head">
+<span class="card-title">Spent 4 hours debugging an agent loop. The bug? A missing newline in the prompt config. Th</span>
+<span class="ch ch-x">x</span><span class="st st-review">review</span>
+</div>
+<div class="card-body">
+<textarea class="draft-ta" readonly rows="4" onclick="taSelectCopy(this)">Spent 4 hours debugging an agent loop. The bug? A missing newline in the prompt config. That&#39;s it.</textarea>
+<div class="hooks"><span class="hook">&#8594; Spent 4 hours debugging an agent loop. The bug? A missing newline in the prompt </span></div>
+<div class="cta">&#8594; CTA: Anyone else?</div>
+
+</div>
+<div class="card-foot">
+<button class="btn btn-copy" data-copy="Spent 4 hours debugging an agent loop. The bug? A missing newline in the prompt config. That's it." onclick="cpyBtn(this)">&#10022; Copy draft</button>
+<button class="btn btn-copy" data-copy="Spent 4 hours debugging an agent loop. The bug? A missing newline in the prompt " onclick="cpyBtn(this)">&#10022; Copy hooks</button>
+<span class="card-meta">ITEM-20260407-0018 &middot; 2026-04-07T17:54</span>
+</div>
+</div>
+<div class="card">
+<div class="card-head">
+<span class="card-title">4 hours debugging an agent loop. Missing newline in prompt config. That&#39;s it.</span>
+<span class="ch ch-x">x</span><span class="st st-review">review</span>
+</div>
+<div class="card-body">
+<textarea class="draft-ta" readonly rows="4" onclick="taSelectCopy(this)">4 hours debugging an agent loop. Missing newline in prompt config. That&#39;s it.</textarea>
+<div class="hooks"><span class="hook">&#8594; 4 hours debugging an agent loop. Missing newline in prompt config. That&#39;s it.</span></div>
+<div class="cta">&#8594; CTA: Anyone else?</div>
+
+</div>
+<div class="card-foot">
+<button class="btn btn-copy" data-copy="4 hours debugging an agent loop. Missing newline in prompt config. That's it." onclick="cpyBtn(this)">&#10022; Copy draft</button>
+<button class="btn btn-copy" data-copy="4 hours debugging an agent loop. Missing newline in prompt config. That's it." onclick="cpyBtn(this)">&#10022; Copy hooks</button>
+<span class="card-meta">ITEM-20260407-0017 &middot; 2026-04-07T17:54</span>
+</div>
+</div>
+<div class="card">
+<div class="card-head">
+<span class="card-title">Spent 4 hours debugging an agent loop. The bug? A missing newline in the prompt config. Th</span>
+<span class="ch ch-x">x</span><span class="st st-review">review</span>
+</div>
+<div class="card-body">
+<textarea class="draft-ta" readonly rows="4" onclick="taSelectCopy(this)">Spent 4 hours debugging an agent loop. The bug? A missing newline in the prompt config. That&#39;s it.</textarea>
+<div class="hooks"><span class="hook">&#8594; Spent 4 hours debugging an agent loop. The bug? A missing newline in the prompt </span></div>
+<div class="cta">&#8594; CTA: Ever had this?</div>
+
+</div>
+<div class="card-foot">
+<button class="btn btn-copy" data-copy="Spent 4 hours debugging an agent loop. The bug? A missing newline in the prompt config. That's it." onclick="cpyBtn(this)">&#10022; Copy draft</button>
+<button class="btn btn-copy" data-copy="Spent 4 hours debugging an agent loop. The bug? A missing newline in the prompt " onclick="cpyBtn(this)">&#10022; Copy hooks</button>
+<span class="card-meta">ITEM-20260407-0016 &middot; 2026-04-07T17:53</span>
+</div>
+</div>
+<div class="card">
+<div class="card-head">
+<span class="card-title">4 hours debugging an agent loop. Missing newline in prompt config. That&#39;s it. #1</span>
+<span class="ch ch-x">x</span><span class="st st-review">review</span>
+</div>
+<div class="card-body">
+<textarea class="draft-ta" readonly rows="4" onclick="taSelectCopy(this)">4 hours debugging an agent loop. Missing newline in prompt config. That&#39;s it.</textarea>
+<div class="hooks"><span class="hook">&#8594; 4 hours debugging an agent loop. Missing newline in prompt config. That&#39;s it.</span></div>
+<div class="cta">&#8594; CTA: Your worst bug?</div>
+
+</div>
+<div class="card-foot">
+<button class="btn btn-copy" data-copy="4 hours debugging an agent loop. Missing newline in prompt config. That's it." onclick="cpyBtn(this)">&#10022; Copy draft</button>
+<button class="btn btn-copy" data-copy="4 hours debugging an agent loop. Missing newline in prompt config. That's it." onclick="cpyBtn(this)">&#10022; Copy hooks</button>
+<span class="card-meta">ITEM-20260407-0015 &middot; 2026-04-07T17:53</span>
+</div>
+</div>
+<div class="card">
+<div class="card-head">
+<span class="card-title">4 hours debugging an agent loop. Missing newline in prompt config. That&#39;s it. #1</span>
+<span class="ch ch-x">x</span><span class="st st-review">review</span>
+</div>
+<div class="card-body">
+<textarea class="draft-ta" readonly rows="4" onclick="taSelectCopy(this)">4 hours debugging an agent loop. Missing newline in prompt config. That&#39;s it.</textarea>
+<div class="hooks"><span class="hook">&#8594; 4 hours debugging an agent loop. Missing newline in prompt config. That&#39;s it.</span></div>
+<div class="cta">&#8594; CTA: Anyone else?</div>
+
+</div>
+<div class="card-foot">
+<button class="btn btn-copy" data-copy="4 hours debugging an agent loop. Missing newline in prompt config. That's it." onclick="cpyBtn(this)">&#10022; Copy draft</button>
+<button class="btn btn-copy" data-copy="4 hours debugging an agent loop. Missing newline in prompt config. That's it." onclick="cpyBtn(this)">&#10022; Copy hooks</button>
+<span class="card-meta">ITEM-20260407-0014 &middot; 2026-04-07T17:51</span>
+</div>
+</div>
+<div class="card">
+<div class="card-head">
+<span class="card-title">4 hours debugging an agent loop. The bug: a missing newline in the prompt config. That&#39;s i #1</span>
+<span class="ch ch-x">x</span><span class="st st-review">review</span>
+</div>
+<div class="card-body">
+<textarea class="draft-ta" readonly rows="4" onclick="taSelectCopy(this)">4 hours debugging an agent loop. The bug: a missing newline in the prompt config. That&#39;s it. Vibecoding is brutal sometimes.</textarea>
+<div class="hooks"><span class="hook">&#8594; 4 hours debugging an agent loop. The bug: a missing newline in the prompt config</span></div>
+<div class="cta">&#8594; CTA: What&#39;s your most frustrating &#39;simple&#39; bug?</div>
+<div class="img-block">
+<img src="/data/.openclaw/workspace/growth/content-factory/assets/images/ITEM-20260407-0008/ITEM-20260407-0008-visual.jpg" class="thumb" alt="visual">
+<a href="/data/.openclaw/workspace/growth/content-factory/assets/images/ITEM-20260407-0008/ITEM-20260407-0008-visual.jpg" download="ITEM-20260407-0008-visual.jpg" class="btn btn-dl">&#11015; Download image</a>
+</div>
+</div>
+<div class="card-foot">
+<button class="btn btn-copy" data-copy="4 hours debugging an agent loop. The bug: a missing newline in the prompt config. That's it. Vibecoding is brutal sometimes." onclick="cpyBtn(this)">&#10022; Copy draft</button>
+<button class="btn btn-copy" data-copy="4 hours debugging an agent loop. The bug: a missing newline in the prompt config" onclick="cpyBtn(this)">&#10022; Copy hooks</button>
+<span class="card-meta">ITEM-20260407-0008 &middot; 2026-04-07T16:40</span>
+</div>
+</div>
+<div class="card">
+<div class="card-head">
+<span class="card-title">4 hours debugging an agent loop. Missing newline in prompt config. That&#39;s it. #1</span>
+<span class="ch ch-x">x</span><span class="st st-review">review</span>
+</div>
+<div class="card-body">
+<textarea class="draft-ta" readonly rows="4" onclick="taSelectCopy(this)">4 hours debugging an agent loop. Missing newline in prompt config. That&#39;s it.</textarea>
+<div class="hooks"><span class="hook">&#8594; 4 hours debugging an agent loop. Missing newline in prompt config. That&#39;s it.</span></div>
+<div class="cta">&#8594; CTA: Anyone else?</div>
+<div class="img-block">
+<img src="/data/.openclaw/workspace/growth/content-factory/assets/images/ITEM-20260407-0011/ITEM-20260407-0011-visual.jpg" class="thumb" alt="visual">
+<a href="/data/.openclaw/workspace/growth/content-factory/assets/images/ITEM-20260407-0011/ITEM-20260407-0011-visual.jpg" download="ITEM-20260407-0011-visual.jpg" class="btn btn-dl">&#11015; Download image</a>
+</div>
+</div>
+<div class="card-foot">
+<button class="btn btn-copy" data-copy="4 hours debugging an agent loop. Missing newline in prompt config. That's it." onclick="cpyBtn(this)">&#10022; Copy draft</button>
+<button class="btn btn-copy" data-copy="4 hours debugging an agent loop. Missing newline in prompt config. That's it." onclick="cpyBtn(this)">&#10022; Copy hooks</button>
+<span class="card-meta">ITEM-20260407-0011 &middot; 2026-04-07T16:37</span>
+</div>
+</div>
+<div class="card">
+<div class="card-head">
+<span class="card-title">Corporate admin by day, AI builder by night. The mental switch is wild. Sometimes I wonder #3</span>
+<span class="ch ch-x">x</span><span class="st st-review">review</span>
+</div>
+<div class="card-body">
+<textarea class="draft-ta" readonly rows="8" onclick="taSelectCopy(this)">Corporate admin by day, AI builder by night. The mental switch is wild. Sometimes I wonder if I&#39;m just playing pretend. The imposter syndrome is real.
+
+My Sachbearbeiter brain is all about process, rules, &#39;that&#39;s how it&#39;s done&#39;. Then I open Cursor and it&#39;s &#39;build whatever&#39;. Total disconnect.
+
+See others shipping complex stuff. My &#39;win&#39; today was fixing a Claude prompt that saved 15 minutes. Feels small. But it&#39;s progress.
+
+The time constraint is brutal. 9-5 then 8-10pm. No big sprints. Just chipping away at small ideas. That&#39;s it.
+
+This imposter feeling? It&#39;s part of the game when you&#39;re building on the side. Not sure it ever goes away. Just gotta keep shipping.</textarea>
+<div class="hooks"><span class="hook">&#8594; Corporate admin by day, AI builder by night. The mental switch is wild. Sometime</span></div>
+<div class="cta">&#8594; CTA: How do you manage the mental split?</div>
+<div class="img-block">
+<img src="/data/.openclaw/workspace/growth/content-factory/assets/images/ITEM-20260407-0013/ITEM-20260407-0013-visual.jpg" class="thumb" alt="visual">
+<a href="/data/.openclaw/workspace/growth/content-factory/assets/images/ITEM-20260407-0013/ITEM-20260407-0013-visual.jpg" download="ITEM-20260407-0013-visual.jpg" class="btn btn-dl">&#11015; Download image</a>
+</div>
+</div>
+<div class="card-foot">
+<button class="btn btn-copy" data-copy="Corporate admin by day, AI builder by night. The mental switch is wild. Sometimes I wonder if I'm just playing pretend. The imposter syndrome is real.\n\nMy Sachbearbeiter brain is all about process, rules, 'that's how it's done'. Then I open Cursor and it's 'build whatever'. Total disconnect.\n\nSee others shipping complex stuff. My 'win' today was fixing a Claude prompt that saved 15 minutes. Feels small. But it's progress.\n\nThe time constraint is brutal. 9-5 then 8-10pm. No big sprints. Just chipping away at small ideas. That's it.\n\nThis imposter feeling? It's part of the game when you're building on the side. Not sure it ever goes away. Just gotta keep shipping." onclick="cpyBtn(this)">&#10022; Copy draft</button>
+<button class="btn btn-copy" data-copy="Corporate admin by day, AI builder by night. The mental switch is wild. Sometime" onclick="cpyBtn(this)">&#10022; Copy hooks</button>
+<span class="card-meta">ITEM-20260407-0013 &middot; 2026-04-07T16:33</span>
+</div>
+</div>
+<div class="card">
+<div class="card-head">
+<span class="card-title">Chasing the latest AI tool for my side project? It&#39;s an asymmetric downside trade. Huge ti #2</span>
+<span class="ch ch-x">x</span><span class="st st-review">review</span>
+</div>
+<div class="card-body">
+<textarea class="draft-ta" readonly rows="4" onclick="taSelectCopy(this)">Chasing the latest AI tool for my side project? It&#39;s an asymmetric downside trade. Huge time sink, low probability of real impact. Better to stick to my vibecoding workflows. That&#39;s it.</textarea>
+<div class="hooks"><span class="hook">&#8594; Chasing the latest AI tool for my side project? It&#39;s an asymmetric downside trad</span></div>
+<div class="cta">&#8594; CTA: How do you manage tool FOMO?</div>
+
+</div>
+<div class="card-foot">
+<button class="btn btn-copy" data-copy="Chasing the latest AI tool for my side project? It's an asymmetric downside trade. Huge time sink, low probability of real impact. Better to stick to my vibecoding workflows. That's it." onclick="cpyBtn(this)">&#10022; Copy draft</button>
+<button class="btn btn-copy" data-copy="Chasing the latest AI tool for my side project? It's an asymmetric downside trad" onclick="cpyBtn(this)">&#10022; Copy hooks</button>
+<span class="card-meta">ITEM-20260407-0012 &middot; 2026-04-07T15:50</span>
+</div>
+</div>
+<div class="card">
+<div class="card-head">
+<span class="card-title">Every week, a new &#39;opportunity&#39; pops up for builders. A new tool, a new niche, a new trend #2</span>
+<span class="ch ch-x">x</span><span class="st st-muted">draft</span>
+</div>
+<div class="card-body">
+<textarea class="draft-ta" readonly rows="7" onclick="taSelectCopy(this)">Every week, a new &#39;opportunity&#39; pops up for builders. A new tool, a new niche, a new trend. They all look promising.
+
+But chasing every one is like terrible position sizing in trading. You can&#39;t put 50% of your capital into every &#39;sure thing&#39; you see.
+
+As a side builder, my &#39;capital&#39; is time. Going all-in on a new shiny object means 0% progress on Oviro. It&#39;s a guaranteed blow-up.
+
+The real skill isn&#39;t spotting opportunities. It&#39;s knowing when to size down, or pass entirely, to protect your core position.</textarea>
+<div class="hooks"><span class="hook">&#8594; Every week, a new &#39;opportunity&#39; pops up for builders. A new tool, a new niche, a</span></div>
+<div class="cta">&#8594; CTA: What&#39;s your mental stop-loss for new ideas?</div>
+
+</div>
+<div class="card-foot">
+<button class="btn btn-copy" data-copy="Every week, a new 'opportunity' pops up for builders. A new tool, a new niche, a new trend. They all look promising.\n\nBut chasing every one is like terrible position sizing in trading. You can't put 50% of your capital into every 'sure thing' you see.\n\nAs a side builder, my 'capital' is time. Going all-in on a new shiny object means 0% progress on Oviro. It's a guaranteed blow-up.\n\nThe real skill isn't spotting opportunities. It's knowing when to size down, or pass entirely, to protect your core position." onclick="cpyBtn(this)">&#10022; Copy draft</button>
+<button class="btn btn-copy" data-copy="Every week, a new 'opportunity' pops up for builders. A new tool, a new niche, a" onclick="cpyBtn(this)">&#10022; Copy hooks</button>
+<span class="card-meta">ITEM-20260407-0009 &middot; 2026-04-07T11:14</span>
+</div>
+</div>
+<div class="card">
+<div class="card-head">
+<span class="card-title">My Sachbearbeiter job in Switzerland taught me something unexpected for Oviro: the grind o #3</span>
+<span class="ch ch-x">x</span><span class="st st-review">review</span>
+</div>
+<div class="card-body">
+<textarea class="draft-ta" readonly rows="8" onclick="taSelectCopy(this)">My Sachbearbeiter job in Switzerland taught me something unexpected for Oviro: the grind of small, repetitive tasks. It&#39;s not glamorous.
+
+Building on the side means 2 hours after work, 1 hour before. No time for &quot;deep work&quot; myths. Just focused sprints on specific tasks.
+
+My day job trained me to just *do* the next thing, even if it&#39;s boring. No overthinking, just execution. That discipline is gold.
+
+Shipping code, talking to users, writing docs for Oviro — it often feels like ticking off a checklist. It&#39;s 80% that.
+
+It&#39;s messy, often feels like I&#39;m just barely keeping up. But the small tasks add up. Oviro gets built, one box ticked.</textarea>
+<div class="hooks"><span class="hook">&#8594; My Sachbearbeiter job in Switzerland taught me something unexpected for Oviro: t</span></div>
+<div class="cta">&#8594; CTA: What&#39;s your secret for getting the mundane done?</div>
+
+</div>
+<div class="card-foot">
+<button class="btn btn-copy" data-copy="My Sachbearbeiter job in Switzerland taught me something unexpected for Oviro: the grind of small, repetitive tasks. It's not glamorous.\n\nBuilding on the side means 2 hours after work, 1 hour before. No time for \"deep work\" myths. Just focused sprints on specific tasks.\n\nMy day job trained me to just *do* the next thing, even if it's boring. No overthinking, just execution. That discipline is gold.\n\nShipping code, talking to users, writing docs for Oviro — it often feels like ticking off a checklist. It's 80% that.\n\nIt's messy, often feels like I'm just barely keeping up. But the small tasks add up. Oviro gets built, one box ticked." onclick="cpyBtn(this)">&#10022; Copy draft</button>
+<button class="btn btn-copy" data-copy="My Sachbearbeiter job in Switzerland taught me something unexpected for Oviro: t" onclick="cpyBtn(this)">&#10022; Copy hooks</button>
+<span class="card-meta">ITEM-20260407-0007 &middot; 2026-04-07T11:13</span>
+</div>
+</div>
+<div class="card">
+<div class="card-head">
+<span class="card-title">Most &quot;opportunities&quot; in building are like chasing a pump in trading. You see others winnin #2</span>
+<span class="ch ch-x">x</span><span class="st st-muted">draft</span>
+</div>
+<div class="card-body">
+<textarea class="draft-ta" readonly rows="8" onclick="taSelectCopy(this)">Most &quot;opportunities&quot; in building are like chasing a pump in trading. You see others winning, feel the FOMO.
+
+In crypto, everyone talks about the next 10x coin. You jump in late, often at the top, without your own research.
+
+Same in building. A new AI tool, a hot niche. You see others &quot;crushing it,&quot; feel like you&#39;re missing out on easy wins.
+
+So you commit time, energy, maybe even money. You&#39;re trading without an edge, just reacting to market noise.
+
+The &quot;opportunity&quot; dumps. Your capital (time, focus) is gone. No real progress on your actual validated problem.
+
+My rule: If it feels like a pump, it probably is. Stick to your validated edge. Ignore the noise.</textarea>
+<div class="hooks"><span class="hook">&#8594; Most &quot;opportunities&quot; in building are like chasing a pump in trading. You see oth</span></div>
+<div class="cta">&#8594; CTA: What&#39;s your strategy for ignoring the hype?</div>
+
+</div>
+<div class="card-foot">
+<button class="btn btn-copy" data-copy="Most \"opportunities\" in building are like chasing a pump in trading. You see others winning, feel the FOMO.\n\nIn crypto, everyone talks about the next 10x coin. You jump in late, often at the top, without your own research.\n\nSame in building. A new AI tool, a hot niche. You see others \"crushing it,\" feel like you're missing out on easy wins.\n\nSo you commit time, energy, maybe even money. You're trading without an edge, just reacting to market noise.\n\nThe \"opportunity\" dumps. Your capital (time, focus) is gone. No real progress on your actual validated problem.\n\nMy rule: If it feels like a pump, it probably is. Stick to your validated edge. Ignore the noise." onclick="cpyBtn(this)">&#10022; Copy draft</button>
+<button class="btn btn-copy" data-copy="Most \"opportunities\" in building are like chasing a pump in trading. You see oth" onclick="cpyBtn(this)">&#10022; Copy hooks</button>
+<span class="card-meta">ITEM-20260407-0006 &middot; 2026-04-07T11:12</span>
+</div>
+</div>
+<div class="card">
+<div class="card-head">
+<span class="card-title">Spent [4 hours] debugging an agent loop. The bug was [a missing newline in a config]. That #1</span>
+<span class="ch ch-x">x</span><span class="st st-review">review</span>
+</div>
+<div class="card-body">
+<textarea class="draft-ta" readonly rows="5" onclick="taSelectCopy(this)">Spent [4 hours] debugging an agent loop. The bug was [a missing newline in a config]. That&#39;s it.
+
+
+
+Specific. Honest. Worth discussing.</textarea>
+<div class="hooks"><span class="hook">&#8594; Spent [4 hours] debugging an agent loop. The bug was [a missing newline in a config]. That&#39;s it.</span><br><span class="hook">&#8594; Brand voice frameworks for AI content — how to maintain authentic voice when AI is generating at scale; train AI with your tone/style</span><br><span class="hook">&#8594; Here&#39;s the specific thing I learned building this.</span></div>
+<div class="cta">&#8594; CTA: What would you add?</div>
+
+</div>
+<div class="card-foot">
+<button class="btn btn-copy" data-copy="Spent [4 hours] debugging an agent loop. The bug was [a missing newline in a config]. That's it.\n\n\n\nSpecific. Honest. Worth discussing." onclick="cpyBtn(this)">&#10022; Copy draft</button>
+<button class="btn btn-copy" data-copy="Spent [4 hours] debugging an agent loop. The bug was [a missing newline in a config]. That's it. | Brand voice frameworks for AI content — how to maintain authentic voice when AI is generating at scale; train AI with your tone/style | Here's the specific thing I learned building this." onclick="cpyBtn(this)">&#10022; Copy hooks</button>
+<span class="card-meta">ITEM-20260407-0005 &middot; 2026-04-07T11:12</span>
+</div>
+</div>
+<div class="card">
+<div class="card-head">
+<span class="card-title">If your workflow ignores Brand voice frameworks for AI content — how to maintain authentic #3</span>
+<span class="ch ch-x">x</span><span class="st st-muted">draft</span>
+</div>
+<div class="card-body">
+<textarea class="draft-ta" readonly rows="4" onclick="taSelectCopy(this)">If your workflow ignores Brand voice frameworks for AI content — how to maintain authentic voice when AI is generating at scale; train AI with your tone/style, it probably isn&#39;t ready yet.Interesting systems are less about novelty and more about what survives friction.I learned this while building and debugging real systems.What my day job taught me about systems thinking that I use in buildingThat&#39;s the part worth talking about.</textarea>
+<div class="hooks"><span class="hook">&#8594; Most AI workflows look smart until you have to run them twice.</span><br><span class="hook">&#8594; The gap between a demo and a reliable system is where most AI projects quietly die.</span><br><span class="hook">&#8594; If your workflow ignores Brand voice frameworks for AI content — how to maintain authentic voice when AI is generating at scale; train AI with your tone/style, it probably isn&#39;t ready yet.</span></div>
+<div class="cta">&#8594; CTA: What keeps breaking in your workflows?</div>
+
+</div>
+<div class="card-foot">
+<button class="btn btn-copy" data-copy="If your workflow ignores Brand voice frameworks for AI content — how to maintain authentic voice when AI is generating at scale; train AI with your tone/style, it probably isn't ready yet.Interesting systems are less about novelty and more about what survives friction.I learned this while building and debugging real systems.What my day job taught me about systems thinking that I use in buildingThat's the part worth talking about." onclick="cpyBtn(this)">&#10022; Copy draft</button>
+<button class="btn btn-copy" data-copy="Most AI workflows look smart until you have to run them twice. | The gap between a demo and a reliable system is where most AI projects quietly die. | If your workflow ignores Brand voice frameworks for AI content — how to maintain authentic voice when AI is generating at scale; train AI with your tone/style, it probably isn't ready yet." onclick="cpyBtn(this)">&#10022; Copy hooks</button>
+<span class="card-meta">ITEM-20260407-0004 &middot; 2026-04-07T11:09</span>
+</div>
+</div>
+<div class="card">
+<div class="card-head">
+<span class="card-title">Most people miss the Why in this.Why most &#39;opportunities&#39; in building share the same failu #2</span>
+<span class="ch ch-x">x</span><span class="st st-review">review</span>
+</div>
+<div class="card-body">
+<textarea class="draft-ta" readonly rows="4" onclick="taSelectCopy(this)">Most people miss the Why in this.Why most &#39;opportunities&#39; in building share the same failure mode as focusing on a single trade&#39;s P&amp;L instead of the system&#39;s long-term expected value.Here&#39;s the mental model:Most people think about this as a outcome problem. It&#39;s actually a probability distribution problem.The difference in how you frame it changes every downstream decision.This is the part of Why that I keep coming back to from trading.What mental models from other fields have changed how you think about building?</textarea>
+<div class="hooks"><span class="hook">&#8594; Why most &#39;opportunities&#39; in building share the same failure mode as [specific trading mistake]</span><br><span class="hook">&#8594; Most people miss the Why in this.</span><br><span class="hook">&#8594; The mental model from mistake] I&#39;m using for building decisions.</span></div>
+<div class="cta">&#8594; CTA: What am I missing here?</div>
+
+</div>
+<div class="card-foot">
+<button class="btn btn-copy" data-copy="Most people miss the Why in this.Why most 'opportunities' in building share the same failure mode as focusing on a single trade's P&L instead of the system's long-term expected value.Here's the mental model:Most people think about this as a outcome problem. It's actually a probability distribution problem.The difference in how you frame it changes every downstream decision.This is the part of Why that I keep coming back to from trading.What mental models from other fields have changed how you think about building?" onclick="cpyBtn(this)">&#10022; Copy draft</button>
+<button class="btn btn-copy" data-copy="Why most 'opportunities' in building share the same failure mode as [specific trading mistake] | Most people miss the Why in this. | The mental model from mistake] I'm using for building decisions." onclick="cpyBtn(this)">&#10022; Copy hooks</button>
+<span class="card-meta">ITEM-20260407-0003 &middot; 2026-04-07T11:09</span>
+</div>
+</div>
+<div class="card">
+<div class="card-head">
+<span class="card-title">Most AI workflows look smart until you have to run them twice. #1</span>
+<span class="ch ch-x">x</span><span class="st st-review">review</span>
+</div>
+<div class="card-body">
+<textarea class="draft-ta" readonly rows="8" onclick="taSelectCopy(this)">Most AI workflows look smart until you have to run them twice.
+
+Demo automation is easy. Reliable workflow design is the hard part.
+
+I learned this while building and debugging real systems.
+
+Spent [4 hours] debugging an agent loop. The bug was [a missing newline in a config]. That&#39;s it.
+
+Build for repeatability, not applause.</textarea>
+<div class="hooks"><span class="hook">&#8594; Most AI workflows look smart until you have to run them twice.</span><br><span class="hook">&#8594; The gap between a demo and a reliable system is where most AI projects quietly die.</span><br><span class="hook">&#8594; If your workflow ignores Brand voice frameworks for AI content — how to maintain authentic voice when AI is generating at scale; train AI with your tone/style, it probably isn&#39;t ready yet.</span></div>
+<div class="cta">&#8594; CTA: What keeps breaking in your workflows?</div>
+
+</div>
+<div class="card-foot">
+<button class="btn btn-copy" data-copy="Most AI workflows look smart until you have to run them twice.\n\nDemo automation is easy. Reliable workflow design is the hard part.\n\nI learned this while building and debugging real systems.\n\nSpent [4 hours] debugging an agent loop. The bug was [a missing newline in a config]. That's it.\n\nBuild for repeatability, not applause." onclick="cpyBtn(this)">&#10022; Copy draft</button>
+<button class="btn btn-copy" data-copy="Most AI workflows look smart until you have to run them twice. | The gap between a demo and a reliable system is where most AI projects quietly die. | If your workflow ignores Brand voice frameworks for AI content — how to maintain authentic voice when AI is generating at scale; train AI with your tone/style, it probably isn't ready yet." onclick="cpyBtn(this)">&#10022; Copy hooks</button>
+<span class="card-meta">ITEM-20260407-0002 &middot; 2026-04-07T11:09</span>
+</div>
+</div>
+<div class="card">
+<div class="card-head">
+<span class="card-title">If your workflow ignores The &#39;First 90 Days of AI Implementation&#39; for Ecommerce: No one is #3</span>
+<span class="ch ch-x">x</span><span class="st st-review">review</span>
+</div>
+<div class="card-body">
+<textarea class="draft-ta" readonly rows="4" onclick="taSelectCopy(this)">If your workflow ignores The &#39;First 90 Days of AI Implementation&#39; for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the &#39;AI backlash&#39; audience is actively seeking. Oviro&#39;s positioning as an &#39;intelligence layer&#39; fits perfectly here., it probably isn&#39;t ready yet.Interesting systems are less about novelty and more about what survives friction.I learned this while building and debugging real systems.What my day job taught me about systems thinking that I use in buildingThat&#39;s the part worth talking about.</textarea>
+<div class="hooks"><span class="hook">&#8594; Most AI workflows look smart until you have to run them twice.</span><br><span class="hook">&#8594; The gap between a demo and a reliable system is where most AI projects quietly die.</span><br><span class="hook">&#8594; If your workflow ignores The &#39;First 90 Days of AI Implementation&#39; for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the &#39;AI backlash&#39; audience is actively seeking. Oviro&#39;s positioning as an &#39;intelligence layer&#39; fits perfectly here., it probably isn&#39;t ready yet.</span></div>
+<div class="cta">&#8594; CTA: What keeps breaking in your workflows?</div>
+
+</div>
+<div class="card-foot">
+<button class="btn btn-copy" data-copy="If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn't ready yet.Interesting systems are less about novelty and more about what survives friction.I learned this while building and debugging real systems.What my day job taught me about systems thinking that I use in buildingThat's the part worth talking about." onclick="cpyBtn(this)">&#10022; Copy draft</button>
+<button class="btn btn-copy" data-copy="Most AI workflows look smart until you have to run them twice. | The gap between a demo and a reliable system is where most AI projects quietly die. | If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn't ready yet." onclick="cpyBtn(this)">&#10022; Copy hooks</button>
+<span class="card-meta">ITEM-20260406-0027 &middot; 2026-04-06T21:26</span>
+</div>
+</div>
+<div class="card">
+<div class="card-head">
+<span class="card-title">Most people miss the Why in this.Why most &#39;opportunities&#39; in building share the same failu #2</span>
+<span class="ch ch-x">x</span><span class="st st-review">review</span>
+</div>
+<div class="card-body">
+<textarea class="draft-ta" readonly rows="4" onclick="taSelectCopy(this)">Most people miss the Why in this.Why most &#39;opportunities&#39; in building share the same failure mode as chasing a single big win.Here&#39;s the mental model:Most people think about this as a outcome problem. It&#39;s actually a probability distribution problem.The difference in how you frame it changes every downstream decision.This is the part of Why that I keep coming back to from trading.What mental models from other fields have changed how you think about building?</textarea>
+<div class="hooks"><span class="hook">&#8594; Why most &#39;opportunities&#39; in building share the same failure mode as [specific trading mistake]</span><br><span class="hook">&#8594; Most people miss the Why in this.</span><br><span class="hook">&#8594; The mental model from mistake] I&#39;m using for building decisions.</span></div>
+<div class="cta">&#8594; CTA: What am I missing here?</div>
+
+</div>
+<div class="card-foot">
+<button class="btn btn-copy" data-copy="Most people miss the Why in this.Why most 'opportunities' in building share the same failure mode as chasing a single big win.Here's the mental model:Most people think about this as a outcome problem. It's actually a probability distribution problem.The difference in how you frame it changes every downstream decision.This is the part of Why that I keep coming back to from trading.What mental models from other fields have changed how you think about building?" onclick="cpyBtn(this)">&#10022; Copy draft</button>
+<button class="btn btn-copy" data-copy="Why most 'opportunities' in building share the same failure mode as [specific trading mistake] | Most people miss the Why in this. | The mental model from mistake] I'm using for building decisions." onclick="cpyBtn(this)">&#10022; Copy hooks</button>
+<span class="card-meta">ITEM-20260406-0026 &middot; 2026-04-06T21:26</span>
+</div>
+</div>
+<div class="card">
+<div class="card-head">
+<span class="card-title">Most people miss the Why in this.Why most &#39;opportunities&#39; in building share the same failu #2</span>
+<span class="ch ch-x">x</span><span class="st st-muted">draft</span>
+</div>
+<div class="card-body">
+<textarea class="draft-ta" readonly rows="4" onclick="taSelectCopy(this)">Most people miss the Why in this.Why most &#39;opportunities&#39; in building share the same failure mode as chasing a single big win.Here&#39;s the mental model:Most people think about this as a outcome problem. It&#39;s actually a probability distribution problem.The difference in how you frame it changes every downstream decision.This is the part of Why that I keep coming back to from trading.What mental models from other fields have changed how you think about building?</textarea>
+<div class="hooks"><span class="hook">&#8594; Why most &#39;opportunities&#39; in building share the same failure mode as [specific trading mistake]</span><br><span class="hook">&#8594; Most people miss the Why in this.</span><br><span class="hook">&#8594; The mental model from mistake] I&#39;m using for building decisions.</span></div>
+<div class="cta">&#8594; CTA: What am I missing here?</div>
+
+</div>
+<div class="card-foot">
+<button class="btn btn-copy" data-copy="Most people miss the Why in this.Why most 'opportunities' in building share the same failure mode as chasing a single big win.Here's the mental model:Most people think about this as a outcome problem. It's actually a probability distribution problem.The difference in how you frame it changes every downstream decision.This is the part of Why that I keep coming back to from trading.What mental models from other fields have changed how you think about building?" onclick="cpyBtn(this)">&#10022; Copy draft</button>
+<button class="btn btn-copy" data-copy="Why most 'opportunities' in building share the same failure mode as [specific trading mistake] | Most people miss the Why in this. | The mental model from mistake] I'm using for building decisions." onclick="cpyBtn(this)">&#10022; Copy hooks</button>
+<span class="card-meta">ITEM-20260406-0023 &middot; 2026-04-06T21:23</span>
+</div>
+</div>
+<div class="card">
+<div class="card-head">
+<span class="card-title">Most AI workflows look smart until you have to run them twice.Demo automation is easy. Rel #1</span>
+<span class="ch ch-x">x</span><span class="st st-muted">draft</span>
+</div>
+<div class="card-body">
+<textarea class="draft-ta" readonly rows="4" onclick="taSelectCopy(this)">Most AI workflows look smart until you have to run them twice.Demo automation is easy. Reliable workflow design is the hard part.I learned this while building and debugging real systems.Spent 4 hours debugging an agent loop. The bug was a missing newline in a config. That&#39;s it.Build for repeatability, not applause.</textarea>
+<div class="hooks"><span class="hook">&#8594; Most AI workflows look smart until you have to run them twice.</span><br><span class="hook">&#8594; The gap between a demo and a reliable system is where most AI projects quietly die.</span><br><span class="hook">&#8594; If your workflow ignores The &#39;First 90 Days of AI Implementation&#39; for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the &#39;AI backlash&#39; audience is actively seeking. Oviro&#39;s positioning as an &#39;intelligence layer&#39; fits perfectly here., it probably isn&#39;t ready yet.</span></div>
+<div class="cta">&#8594; CTA: What keeps breaking in your workflows?</div>
+
+</div>
+<div class="card-foot">
+<button class="btn btn-copy" data-copy="Most AI workflows look smart until you have to run them twice.Demo automation is easy. Reliable workflow design is the hard part.I learned this while building and debugging real systems.Spent 4 hours debugging an agent loop. The bug was a missing newline in a config. That's it.Build for repeatability, not applause." onclick="cpyBtn(this)">&#10022; Copy draft</button>
+<button class="btn btn-copy" data-copy="Most AI workflows look smart until you have to run them twice. | The gap between a demo and a reliable system is where most AI projects quietly die. | If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn't ready yet." onclick="cpyBtn(this)">&#10022; Copy hooks</button>
+<span class="card-meta">ITEM-20260406-0022 &middot; 2026-04-06T21:23</span>
+</div>
+</div>
+<div class="card">
+<div class="card-head">
+<span class="card-title">What my day job taught me about [specific skill] that I use in building #3</span>
+<span class="ch ch-x">x</span><span class="st st-muted">draft</span>
+</div>
+<div class="card-body">
+<textarea class="draft-ta" readonly rows="4" onclick="taSelectCopy(this)">If your workflow ignores The &#39;First 90 Days of AI Implementation&#39; for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the &#39;AI backlash&#39; audience is actively seeking. Oviro&#39;s positioning as an &#39;intelligence layer&#39; fits perfectly here., it probably isn&#39;t ready yet.Interesting systems are less about novelty and more about what survives friction.I learned this while building and debugging real systems.What my day job taught me about systems thinking that I use in buildingThat&#39;s the part worth talking about.</textarea>
+<div class="hooks"><span class="hook">&#8594; Most AI workflows look smart until you have to run them twice.</span><br><span class="hook">&#8594; The gap between a demo and a reliable system is where most AI projects quietly die.</span><br><span class="hook">&#8594; If your workflow ignores The &#39;First 90 Days of AI Implementation&#39; for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the &#39;AI backlash&#39; audience is actively seeking. Oviro&#39;s positioning as an &#39;intelligence layer&#39; fits perfectly here., it probably isn&#39;t ready yet.</span></div>
+<div class="cta">&#8594; CTA: What keeps breaking in your workflows?</div>
+
+</div>
+<div class="card-foot">
+<button class="btn btn-copy" data-copy="If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn't ready yet.Interesting systems are less about novelty and more about what survives friction.I learned this while building and debugging real systems.What my day job taught me about systems thinking that I use in buildingThat's the part worth talking about." onclick="cpyBtn(this)">&#10022; Copy draft</button>
+<button class="btn btn-copy" data-copy="Most AI workflows look smart until you have to run them twice. | The gap between a demo and a reliable system is where most AI projects quietly die. | If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn't ready yet." onclick="cpyBtn(this)">&#10022; Copy hooks</button>
+<span class="card-meta">ITEM-20260406-0021 &middot; 2026-04-06T21:21</span>
+</div>
+</div>
+<div class="card">
+<div class="card-head">
+<span class="card-title">Why most &#39;opportunities&#39; in building share the same failure mode as [specific trading mistake] #2</span>
+<span class="ch ch-x">x</span><span class="st st-muted">draft</span>
+</div>
+<div class="card-body">
+<textarea class="draft-ta" readonly rows="4" onclick="taSelectCopy(this)">Most people miss the Why in this.Why most &#39;opportunities&#39; in building share the same failure mode as confusing a single lucky trade with a robust strategy.Here&#39;s the mental model:Most people think about this as a outcome problem. It&#39;s actually a probability distribution problem.The difference in how you frame it changes every downstream decision.This is the part of Why that I keep coming back to from trading.What mental models from other fields have changed how you think about building?</textarea>
+<div class="hooks"><span class="hook">&#8594; Why most &#39;opportunities&#39; in building share the same failure mode as [specific trading mistake]</span><br><span class="hook">&#8594; Most people miss the Why in this.</span><br><span class="hook">&#8594; The mental model from mistake] I&#39;m using for building decisions.</span></div>
+<div class="cta">&#8594; CTA: What am I missing here?</div>
+
+</div>
+<div class="card-foot">
+<button class="btn btn-copy" data-copy="Most people miss the Why in this.Why most 'opportunities' in building share the same failure mode as confusing a single lucky trade with a robust strategy.Here's the mental model:Most people think about this as a outcome problem. It's actually a probability distribution problem.The difference in how you frame it changes every downstream decision.This is the part of Why that I keep coming back to from trading.What mental models from other fields have changed how you think about building?" onclick="cpyBtn(this)">&#10022; Copy draft</button>
+<button class="btn btn-copy" data-copy="Why most 'opportunities' in building share the same failure mode as [specific trading mistake] | Most people miss the Why in this. | The mental model from mistake] I'm using for building decisions." onclick="cpyBtn(this)">&#10022; Copy hooks</button>
+<span class="card-meta">ITEM-20260406-0020 &middot; 2026-04-06T21:21</span>
+</div>
+</div>
+<div class="card">
+<div class="card-head">
+<span class="card-title">Spent [4 hours] debugging an agent loop. The bug was [a missing newline in a config]. That&#39;s it. #1</span>
+<span class="ch ch-x">x</span><span class="st st-muted">draft</span>
+</div>
+<div class="card-body">
+<textarea class="draft-ta" readonly rows="4" onclick="taSelectCopy(this)">Most AI workflows look smart until you have to run them twice.Demo automation is easy. Reliable workflow design is the hard part.I learned this while building and debugging real systems.Spent 4 hours debugging an agent loop. The bug was a missing newline in a config. That&#39;s it.Build for repeatability, not applause.</textarea>
+<div class="hooks"><span class="hook">&#8594; Most AI workflows look smart until you have to run them twice.</span><br><span class="hook">&#8594; The gap between a demo and a reliable system is where most AI projects quietly die.</span><br><span class="hook">&#8594; If your workflow ignores The &#39;First 90 Days of AI Implementation&#39; for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the &#39;AI backlash&#39; audience is actively seeking. Oviro&#39;s positioning as an &#39;intelligence layer&#39; fits perfectly here., it probably isn&#39;t ready yet.</span></div>
+<div class="cta">&#8594; CTA: What keeps breaking in your workflows?</div>
+
+</div>
+<div class="card-foot">
+<button class="btn btn-copy" data-copy="Most AI workflows look smart until you have to run them twice.Demo automation is easy. Reliable workflow design is the hard part.I learned this while building and debugging real systems.Spent 4 hours debugging an agent loop. The bug was a missing newline in a config. That's it.Build for repeatability, not applause." onclick="cpyBtn(this)">&#10022; Copy draft</button>
+<button class="btn btn-copy" data-copy="Most AI workflows look smart until you have to run them twice. | The gap between a demo and a reliable system is where most AI projects quietly die. | If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn't ready yet." onclick="cpyBtn(this)">&#10022; Copy hooks</button>
+<span class="card-meta">ITEM-20260406-0019 &middot; 2026-04-06T21:21</span>
+</div>
+</div>
+<div class="card">
+<div class="card-head">
+<span class="card-title">Built [X] with vibecoding in [time]. Here&#39;s the honest verdict. #1</span>
+<span class="ch ch-x">x</span><span class="st st-muted">draft</span>
+</div>
+<div class="card-body">
+<textarea class="draft-ta" readonly rows="8" onclick="taSelectCopy(this)">Most AI workflows look smart until you have to run them twice.
+
+Demo automation is easy. Reliable workflow design is the hard part.
+
+I learned this while building and debugging real systems.
+
+Built [X] with vibecoding in [time]. Here&#39;s the honest verdict.
+
+Build for repeatability, not applause.</textarea>
+<div class="hooks"><span class="hook">&#8594; Most AI workflows look smart until you have to run them twice.</span><br><span class="hook">&#8594; The gap between a demo and a reliable system is where most AI projects quietly die.</span><br><span class="hook">&#8594; If your workflow ignores The &#39;First 90 Days of AI Implementation&#39; for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the &#39;AI backlash&#39; audience is actively seeking. Oviro&#39;s positioning as an &#39;intelligence layer&#39; fits perfectly here., it probably isn&#39;t ready yet.</span></div>
+<div class="cta">&#8594; CTA: What keeps breaking in your workflows?</div>
+
+</div>
+<div class="card-foot">
+<button class="btn btn-copy" data-copy="Most AI workflows look smart until you have to run them twice.\n\nDemo automation is easy. Reliable workflow design is the hard part.\n\nI learned this while building and debugging real systems.\n\nBuilt [X] with vibecoding in [time]. Here's the honest verdict.\n\nBuild for repeatability, not applause." onclick="cpyBtn(this)">&#10022; Copy draft</button>
+<button class="btn btn-copy" data-copy="Most AI workflows look smart until you have to run them twice. | The gap between a demo and a reliable system is where most AI projects quietly die. | If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn't ready yet." onclick="cpyBtn(this)">&#10022; Copy hooks</button>
+<span class="card-meta">ITEM-20260406-0016 &middot; 2026-04-06T21:10</span>
+</div>
+</div>
+<div class="card">
+<div class="card-head">
+<span class="card-title">Why most &#39;opportunities&#39; in [building/trading/AI] share the same failure mode #2</span>
+<span class="ch ch-x">x</span><span class="st st-muted">draft</span>
+</div>
+<div class="card-body">
+<textarea class="draft-ta" readonly rows="8" onclick="taSelectCopy(this)">Most people miss the Why in this.
+
+Why most &#39;opportunities&#39; in [building/trading/AI] share the same failure mode.
+
+Here&#39;s the mental model:
+
+Most people think about this as a outcome problem. It&#39;s actually a probability distribution problem.
+
+The difference in how you frame it changes every downstream decision.
+
+This is the part of Why that I keep coming back to from trading.
+
+What mental models from other fields have changed how you think about building?</textarea>
+<div class="hooks"><span class="hook">&#8594; Why most &#39;opportunities&#39; in [building/trading/AI] share the same failure mode</span><br><span class="hook">&#8594; Most people miss the Why in this.</span><br><span class="hook">&#8594; The mental model from mode I&#39;m using for building decisions.</span></div>
+<div class="cta">&#8594; CTA: What am I missing here?</div>
+
+</div>
+<div class="card-foot">
+<button class="btn btn-copy" data-copy="Most people miss the Why in this.\n\nWhy most 'opportunities' in [building/trading/AI] share the same failure mode.\n\nHere's the mental model:\n\nMost people think about this as a outcome problem. It's actually a probability distribution problem.\n\nThe difference in how you frame it changes every downstream decision.\n\nThis is the part of Why that I keep coming back to from trading.\n\nWhat mental models from other fields have changed how you think about building?" onclick="cpyBtn(this)">&#10022; Copy draft</button>
+<button class="btn btn-copy" data-copy="Why most 'opportunities' in [building/trading/AI] share the same failure mode | Most people miss the Why in this. | The mental model from mode I'm using for building decisions." onclick="cpyBtn(this)">&#10022; Copy hooks</button>
+<span class="card-meta">ITEM-20260406-0017 &middot; 2026-04-06T21:10</span>
+</div>
+</div>
+<div class="card">
+<div class="card-head">
+<span class="card-title">What [player] does that most people watching don&#39;t notice #3</span>
+<span class="ch ch-x">x</span><span class="st st-muted">draft</span>
+</div>
+<div class="card-body">
+<textarea class="draft-ta" readonly rows="4" onclick="taSelectCopy(this)">What [player] does that most people watching don&#39;t notice
+
+Not a score update. Just: the structural play here is worth thinking about.</textarea>
+<div class="hooks"><span class="hook">&#8594; What [player] does that most people watching don&#39;t notice</span><br><span class="hook">&#8594; Watching don&#39;t is like watching a system, not just a player.</span><br><span class="hook">&#8594; The structural thing about What that most fans miss.</span></div>
+<div class="cta">&#8594; CTA: What are you watching for in this one?</div>
+
+</div>
+<div class="card-foot">
+<button class="btn btn-copy" data-copy="What [player] does that most people watching don't notice\n\nNot a score update. Just: the structural play here is worth thinking about." onclick="cpyBtn(this)">&#10022; Copy draft</button>
+<button class="btn btn-copy" data-copy="What [player] does that most people watching don't notice | Watching don't is like watching a system, not just a player. | The structural thing about What that most fans miss." onclick="cpyBtn(this)">&#10022; Copy hooks</button>
+<span class="card-meta">ITEM-20260406-0018 &middot; 2026-04-06T21:10</span>
+</div>
+</div>
+<div class="card">
+<div class="card-head">
+<span class="card-title">Built [X] with vibecoding in [time]. Here&#39;s the honest verdict. #1</span>
+<span class="ch ch-x">x</span><span class="st st-muted">draft</span>
+</div>
+<div class="card-body">
+<textarea class="draft-ta" readonly rows="8" onclick="taSelectCopy(this)">Most AI workflows look smart until you have to run them twice.
+
+Demo automation is easy. Reliable workflow design is the hard part.
+
+I learned this while building and debugging real systems.
+
+Built [X] with vibecoding in [time]. Here&#39;s the honest verdict.
+
+Build for repeatability, not applause.</textarea>
+<div class="hooks"><span class="hook">&#8594; Most AI workflows look smart until you have to run them twice.</span><br><span class="hook">&#8594; The gap between a demo and a reliable system is where most AI projects quietly die.</span><br><span class="hook">&#8594; If your workflow ignores The &#39;First 90 Days of AI Implementation&#39; for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the &#39;AI backlash&#39; audience is actively seeking. Oviro&#39;s positioning as an &#39;intelligence layer&#39; fits perfectly here., it probably isn&#39;t ready yet.</span></div>
+<div class="cta">&#8594; CTA: What keeps breaking in your workflows?</div>
+
+</div>
+<div class="card-foot">
+<button class="btn btn-copy" data-copy="Most AI workflows look smart until you have to run them twice.\n\nDemo automation is easy. Reliable workflow design is the hard part.\n\nI learned this while building and debugging real systems.\n\nBuilt [X] with vibecoding in [time]. Here's the honest verdict.\n\nBuild for repeatability, not applause." onclick="cpyBtn(this)">&#10022; Copy draft</button>
+<button class="btn btn-copy" data-copy="Most AI workflows look smart until you have to run them twice. | The gap between a demo and a reliable system is where most AI projects quietly die. | If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn't ready yet." onclick="cpyBtn(this)">&#10022; Copy hooks</button>
+<span class="card-meta">ITEM-20260406-0013 &middot; 2026-04-06T21:09</span>
+</div>
+</div>
+<div class="card">
+<div class="card-head">
+<span class="card-title">3 things I learned building [system] that weren&#39;t in any tutorial #3</span>
+<span class="ch ch-x">x</span><span class="st st-muted">draft</span>
+</div>
+<div class="card-body">
+<textarea class="draft-ta" readonly rows="8" onclick="taSelectCopy(this)">If your workflow ignores The &#39;First 90 Days of AI Implementation&#39; for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the &#39;AI backlash&#39; audience is actively seeking. Oviro&#39;s positioning as an &#39;intelligence layer&#39; fits perfectly here., it probably isn&#39;t ready yet.
+
+Interesting systems are less about novelty and more about what survives friction.
+
+I learned this while building and debugging real systems.
+
+3 things I learned building [system] that weren&#39;t in any tutorial
+
+That&#39;s the part worth talking about.</textarea>
+<div class="hooks"><span class="hook">&#8594; Most AI workflows look smart until you have to run them twice.</span><br><span class="hook">&#8594; The gap between a demo and a reliable system is where most AI projects quietly die.</span><br><span class="hook">&#8594; If your workflow ignores The &#39;First 90 Days of AI Implementation&#39; for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the &#39;AI backlash&#39; audience is actively seeking. Oviro&#39;s positioning as an &#39;intelligence layer&#39; fits perfectly here., it probably isn&#39;t ready yet.</span></div>
+<div class="cta">&#8594; CTA: What keeps breaking in your workflows?</div>
+
+</div>
+<div class="card-foot">
+<button class="btn btn-copy" data-copy="If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn't ready yet.\n\nInteresting systems are less about novelty and more about what survives friction.\n\nI learned this while building and debugging real systems.\n\n3 things I learned building [system] that weren't in any tutorial\n\nThat's the part worth talking about." onclick="cpyBtn(this)">&#10022; Copy draft</button>
+<button class="btn btn-copy" data-copy="Most AI workflows look smart until you have to run them twice. | The gap between a demo and a reliable system is where most AI projects quietly die. | If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn't ready yet." onclick="cpyBtn(this)">&#10022; Copy hooks</button>
+<span class="card-meta">ITEM-20260406-0015 &middot; 2026-04-06T21:09</span>
+</div>
+</div>
+<div class="card">
+<div class="card-head">
+<span class="card-title">Why most AI workflows fail after the first impressive output #3</span>
+<span class="ch ch-x">x</span><span class="st st-muted">draft</span>
+</div>
+<div class="card-body">
+<textarea class="draft-ta" readonly rows="8" onclick="taSelectCopy(this)">If your workflow ignores The &#39;First 90 Days of AI Implementation&#39; for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the &#39;AI backlash&#39; audience is actively seeking. Oviro&#39;s positioning as an &#39;intelligence layer&#39; fits perfectly here., it probably isn’t ready yet.
+
+Interesting systems are less about novelty and more about what survives friction.
+
+I learned this while building and debugging real systems.
+
+Why most AI workflows fail after the first impressive output
+
+That’s the part worth talking about.</textarea>
+<div class="hooks"><span class="hook">&#8594; Most AI workflows look smart until you have to run them twice.</span><br><span class="hook">&#8594; The gap between a demo and a reliable system is where most AI projects quietly die.</span><br><span class="hook">&#8594; If your workflow ignores The &#39;First 90 Days of AI Implementation&#39; for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the &#39;AI backlash&#39; audience is actively seeking. Oviro&#39;s positioning as an &#39;intelligence layer&#39; fits perfectly here., it probably isn’t ready yet.</span></div>
+<div class="cta">&#8594; CTA: Invite operators/builders to reply with what keeps breaking in their workflows.</div>
+
+</div>
+<div class="card-foot">
+<button class="btn btn-copy" data-copy="If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn’t ready yet.\n\nInteresting systems are less about novelty and more about what survives friction.\n\nI learned this while building and debugging real systems.\n\nWhy most AI workflows fail after the first impressive output\n\nThat’s the part worth talking about." onclick="cpyBtn(this)">&#10022; Copy draft</button>
+<button class="btn btn-copy" data-copy="Most AI workflows look smart until you have to run them twice. | The gap between a demo and a reliable system is where most AI projects quietly die. | If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn’t ready yet." onclick="cpyBtn(this)">&#10022; Copy hooks</button>
+<span class="card-meta">ITEM-20260406-0012 &middot; 2026-04-06T21:06</span>
+</div>
+</div>
+<div class="card">
+<div class="card-head">
+<span class="card-title">What broke in a multi-agent setup and what the fix taught me #1</span>
+<span class="ch ch-x">x</span><span class="st st-review">review</span>
+</div>
+<div class="card-body">
+<textarea class="draft-ta" readonly rows="8" onclick="taSelectCopy(this)">Most AI workflows look smart until you have to run them twice.
+
+Demo automation is easy. Reliable workflow design is the hard part.
+
+I learned this while building and debugging real systems.
+
+What broke in a multi-agent setup and what the fix taught me
+
+Build for repeatability, not applause.</textarea>
+<div class="hooks"><span class="hook">&#8594; Most AI workflows look smart until you have to run them twice.</span><br><span class="hook">&#8594; The gap between a demo and a reliable system is where most AI projects quietly die.</span><br><span class="hook">&#8594; If your workflow ignores The &#39;First 90 Days of AI Implementation&#39; for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the &#39;AI backlash&#39; audience is actively seeking. Oviro&#39;s positioning as an &#39;intelligence layer&#39; fits perfectly here., it probably isn’t ready yet.</span></div>
+<div class="cta">&#8594; CTA: Invite operators/builders to reply with what keeps breaking in their workflows.</div>
+<div class="img-block">
+<img src="/data/.openclaw/workspace/growth/content-factory/assets/images/ITEM-20260406-0007/ITEM-20260406-0007-visual.jpg" class="thumb" alt="visual">
+<a href="/data/.openclaw/workspace/growth/content-factory/assets/images/ITEM-20260406-0007/ITEM-20260406-0007-visual.jpg" download="ITEM-20260406-0007-visual.jpg" class="btn btn-dl">&#11015; Download image</a>
+</div>
+</div>
+<div class="card-foot">
+<button class="btn btn-copy" data-copy="Most AI workflows look smart until you have to run them twice.\n\nDemo automation is easy. Reliable workflow design is the hard part.\n\nI learned this while building and debugging real systems.\n\nWhat broke in a multi-agent setup and what the fix taught me\n\nBuild for repeatability, not applause." onclick="cpyBtn(this)">&#10022; Copy draft</button>
+<button class="btn btn-copy" data-copy="Most AI workflows look smart until you have to run them twice. | The gap between a demo and a reliable system is where most AI projects quietly die. | If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn’t ready yet." onclick="cpyBtn(this)">&#10022; Copy hooks</button>
+<span class="card-meta">ITEM-20260406-0007 &middot; 2026-04-06T21:06</span>
+</div>
+</div>
+<div class="card">
+<div class="card-head">
+<span class="card-title">Why most AI workflows fail after the first impressive output #3</span>
+<span class="ch ch-x">x</span><span class="st st-muted">draft</span>
+</div>
+<div class="card-body">
+<textarea class="draft-ta" readonly rows="8" onclick="taSelectCopy(this)">If your workflow ignores The &#39;First 90 Days of AI Implementation&#39; for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the &#39;AI backlash&#39; audience is actively seeking. Oviro&#39;s positioning as an &#39;intelligence layer&#39; fits perfectly here., it probably isn’t ready yet.
+
+Interesting systems are less about novelty and more about what survives friction.
+
+I learned this while building and debugging real systems.
+
+Why most AI workflows fail after the first impressive output
+
+That’s the part worth talking about.</textarea>
+<div class="hooks"><span class="hook">&#8594; Most AI workflows look smart until you have to run them twice.</span><br><span class="hook">&#8594; The gap between a demo and a reliable system is where most AI projects quietly die.</span><br><span class="hook">&#8594; If your workflow ignores The &#39;First 90 Days of AI Implementation&#39; for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the &#39;AI backlash&#39; audience is actively seeking. Oviro&#39;s positioning as an &#39;intelligence layer&#39; fits perfectly here., it probably isn’t ready yet.</span></div>
+<div class="cta">&#8594; CTA: Invite operators/builders to reply with what keeps breaking in their workflows.</div>
+
+</div>
+<div class="card-foot">
+<button class="btn btn-copy" data-copy="If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn’t ready yet.\n\nInteresting systems are less about novelty and more about what survives friction.\n\nI learned this while building and debugging real systems.\n\nWhy most AI workflows fail after the first impressive output\n\nThat’s the part worth talking about." onclick="cpyBtn(this)">&#10022; Copy draft</button>
+<button class="btn btn-copy" data-copy="Most AI workflows look smart until you have to run them twice. | The gap between a demo and a reliable system is where most AI projects quietly die. | If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn’t ready yet." onclick="cpyBtn(this)">&#10022; Copy hooks</button>
+<span class="card-meta">ITEM-20260406-0009 &middot; 2026-04-06T21:06</span>
+</div>
+</div>
+<div class="card">
+<div class="card-head">
+<span class="card-title">What broke in a multi-agent setup and what the fix taught me #1</span>
+<span class="ch ch-x">x</span><span class="st st-review">review</span>
+</div>
+<div class="card-body">
+<textarea class="draft-ta" readonly rows="8" onclick="taSelectCopy(this)">Most AI workflows look smart until you have to run them twice.
+
+Demo automation is easy. Reliable workflow design is the hard part.
+
+I learned this while building and debugging real systems.
+
+What broke in a multi-agent setup and what the fix taught me
+
+Build for repeatability, not applause.</textarea>
+<div class="hooks"><span class="hook">&#8594; Most AI workflows look smart until you have to run them twice.</span><br><span class="hook">&#8594; The gap between a demo and a reliable system is where most AI projects quietly die.</span><br><span class="hook">&#8594; If your workflow ignores The &#39;First 90 Days of AI Implementation&#39; for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the &#39;AI backlash&#39; audience is actively seeking. Oviro&#39;s positioning as an &#39;intelligence layer&#39; fits perfectly here., it probably isn’t ready yet.</span></div>
+<div class="cta">&#8594; CTA: Invite operators/builders to reply with what keeps breaking in their workflows.</div>
+<div class="img-block">
+<img src="/data/.openclaw/workspace/growth/content-factory/assets/images/ITEM-20260406-0004/ITEM-20260406-0004-visual.jpg" class="thumb" alt="visual">
+<a href="/data/.openclaw/workspace/growth/content-factory/assets/images/ITEM-20260406-0004/ITEM-20260406-0004-visual.jpg" download="ITEM-20260406-0004-visual.jpg" class="btn btn-dl">&#11015; Download image</a>
+</div>
+</div>
+<div class="card-foot">
+<button class="btn btn-copy" data-copy="Most AI workflows look smart until you have to run them twice.\n\nDemo automation is easy. Reliable workflow design is the hard part.\n\nI learned this while building and debugging real systems.\n\nWhat broke in a multi-agent setup and what the fix taught me\n\nBuild for repeatability, not applause." onclick="cpyBtn(this)">&#10022; Copy draft</button>
+<button class="btn btn-copy" data-copy="Most AI workflows look smart until you have to run them twice. | The gap between a demo and a reliable system is where most AI projects quietly die. | If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn’t ready yet." onclick="cpyBtn(this)">&#10022; Copy hooks</button>
+<span class="card-meta">ITEM-20260406-0004 &middot; 2026-04-06T21:06</span>
+</div>
+</div>
+<div class="card">
+<div class="card-head">
+<span class="card-title">The difference between a demo automation and a reliable operating system #2</span>
+<span class="ch ch-x">x</span><span class="st st-review">review</span>
+</div>
+<div class="card-body">
+<textarea class="draft-ta" readonly rows="8" onclick="taSelectCopy(this)">The gap between a demo and a reliable system is where most AI projects quietly die.
+
+Too much AI content skips ownership, review loops, and constraints.
+
+I learned this while building and debugging real systems.
+
+The difference between a demo automation and a reliable operating system
+
+That’s where the real work is.</textarea>
+<div class="hooks"><span class="hook">&#8594; Most AI workflows look smart until you have to run them twice.</span><br><span class="hook">&#8594; The gap between a demo and a reliable system is where most AI projects quietly die.</span><br><span class="hook">&#8594; If your workflow ignores The &#39;First 90 Days of AI Implementation&#39; for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the &#39;AI backlash&#39; audience is actively seeking. Oviro&#39;s positioning as an &#39;intelligence layer&#39; fits perfectly here., it probably isn’t ready yet.</span></div>
+<div class="cta">&#8594; CTA: Invite operators/builders to reply with what keeps breaking in their workflows.</div>
+<div class="img-block">
+<img src="/data/.openclaw/workspace/growth/content-factory/assets/images/ITEM-20260406-0005/ITEM-20260406-0005-visual.jpg" class="thumb" alt="visual">
+<a href="/data/.openclaw/workspace/growth/content-factory/assets/images/ITEM-20260406-0005/ITEM-20260406-0005-visual.jpg" download="ITEM-20260406-0005-visual.jpg" class="btn btn-dl">&#11015; Download image</a>
+</div>
+</div>
+<div class="card-foot">
+<button class="btn btn-copy" data-copy="The gap between a demo and a reliable system is where most AI projects quietly die.\n\nToo much AI content skips ownership, review loops, and constraints.\n\nI learned this while building and debugging real systems.\n\nThe difference between a demo automation and a reliable operating system\n\nThat’s where the real work is." onclick="cpyBtn(this)">&#10022; Copy draft</button>
+<button class="btn btn-copy" data-copy="Most AI workflows look smart until you have to run them twice. | The gap between a demo and a reliable system is where most AI projects quietly die. | If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn’t ready yet." onclick="cpyBtn(this)">&#10022; Copy hooks</button>
+<span class="card-meta">ITEM-20260406-0005 &middot; 2026-04-06T21:06</span>
+</div>
+</div>
+<div class="card">
+<div class="card-head">
+<span class="card-title">Why most AI workflows fail after the first impressive output #3</span>
+<span class="ch ch-x">x</span><span class="st st-muted">draft</span>
+</div>
+<div class="card-body">
+<textarea class="draft-ta" readonly rows="8" onclick="taSelectCopy(this)">If your workflow ignores The &#39;First 90 Days of AI Implementation&#39; for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the &#39;AI backlash&#39; audience is actively seeking. Oviro&#39;s positioning as an &#39;intelligence layer&#39; fits perfectly here., it probably isn’t ready yet.
+
+Interesting systems are less about novelty and more about what survives friction.
+
+I learned this while building and debugging real systems.
+
+Why most AI workflows fail after the first impressive output
+
+That’s the part worth talking about.</textarea>
+<div class="hooks"><span class="hook">&#8594; Most AI workflows look smart until you have to run them twice.</span><br><span class="hook">&#8594; The gap between a demo and a reliable system is where most AI projects quietly die.</span><br><span class="hook">&#8594; If your workflow ignores The &#39;First 90 Days of AI Implementation&#39; for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the &#39;AI backlash&#39; audience is actively seeking. Oviro&#39;s positioning as an &#39;intelligence layer&#39; fits perfectly here., it probably isn’t ready yet.</span></div>
+<div class="cta">&#8594; CTA: Invite operators/builders to reply with what keeps breaking in their workflows.</div>
+
+</div>
+<div class="card-foot">
+<button class="btn btn-copy" data-copy="If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn’t ready yet.\n\nInteresting systems are less about novelty and more about what survives friction.\n\nI learned this while building and debugging real systems.\n\nWhy most AI workflows fail after the first impressive output\n\nThat’s the part worth talking about." onclick="cpyBtn(this)">&#10022; Copy draft</button>
+<button class="btn btn-copy" data-copy="Most AI workflows look smart until you have to run them twice. | The gap between a demo and a reliable system is where most AI projects quietly die. | If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn’t ready yet." onclick="cpyBtn(this)">&#10022; Copy hooks</button>
+<span class="card-meta">ITEM-20260406-0006 &middot; 2026-04-06T21:06</span>
+</div>
+</div>
+<div class="card">
+<div class="card-head">
+<span class="card-title">Why most AI workflows fail after the first impressive output #1</span>
+<span class="ch ch-linkedin">linkedin</span><span class="st st-muted">draft</span>
+</div>
+<div class="card-body">
+<textarea class="draft-ta" readonly rows="8" onclick="taSelectCopy(this)">Most AI workflows look smart until you have to run them twice.
+
+One thing I keep noticing while building operator-grade AI systems: the first version usually proves the concept, not the operating model.
+
+The real work starts when you ask:
+- who owns what
+- what breaks under repetition
+- where the approval/risk boundary sits
+- what should stay manual until reliability is earned
+
+That’s why I’m more interested in routing, review loops, and constraints than flashy automations.
+
+Recent example: I learned this while building and debugging real systems.
+
+Why most AI workflows fail after the first impressive output.
+
+If you’re building with AI, design for the second run — not the demo.</textarea>
+<div class="hooks"><span class="hook">&#8594; Most AI workflows look smart until you have to run them twice.</span><br><span class="hook">&#8594; The gap between a demo and a reliable system is where most AI projects quietly die.</span><br><span class="hook">&#8594; If your workflow ignores The &#39;First 90 Days of AI Implementation&#39; for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the &#39;AI backlash&#39; audience is actively seeking. Oviro&#39;s positioning as an &#39;intelligence layer&#39; fits perfectly here., it probably isn’t ready yet.</span></div>
+<div class="cta">&#8594; CTA: Invite operators/builders to reply with what keeps breaking in their workflows.</div>
+
+</div>
+<div class="card-foot">
+<button class="btn btn-copy" data-copy="Most AI workflows look smart until you have to run them twice.\n\nOne thing I keep noticing while building operator-grade AI systems: the first version usually proves the concept, not the operating model.\n\nThe real work starts when you ask:\n- who owns what\n- what breaks under repetition\n- where the approval/risk boundary sits\n- what should stay manual until reliability is earned\n\nThat’s why I’m more interested in routing, review loops, and constraints than flashy automations.\n\nRecent example: I learned this while building and debugging real systems.\n\nWhy most AI workflows fail after the first impressive output.\n\nIf you’re building with AI, design for the second run — not the demo." onclick="cpyBtn(this)">&#10022; Copy draft</button>
+<button class="btn btn-copy" data-copy="Most AI workflows look smart until you have to run them twice. | The gap between a demo and a reliable system is where most AI projects quietly die. | If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn’t ready yet." onclick="cpyBtn(this)">&#10022; Copy hooks</button>
+<span class="card-meta">ITEM-20260406-0001 &middot; 2026-04-06T16:54</span>
+</div>
+</div>
+<div class="card">
+<div class="card-head">
+<span class="card-title">What I would not build first again #2</span>
+<span class="ch ch-linkedin">linkedin</span><span class="st st-muted">draft</span>
+</div>
+<div class="card-body">
+<textarea class="draft-ta" readonly rows="8" onclick="taSelectCopy(this)">The gap between a demo and a reliable system is where most AI projects quietly die.
+
+A lot of AI content focuses on tools. I care more about failure points.
+
+Not because the tools don’t matter — they do. But most systems fail somewhere much more boring:
+- unclear ownership
+- weak review loops
+- no approval boundary
+- too much automation too early
+
+That’s the part people skip when they want the shiny version of AI.
+
+I learned this while building and debugging real systems.
+
+What I would not build first again.
+
+Interesting systems aren’t the ones that look magical. They’re the ones that survive repetition.</textarea>
+<div class="hooks"><span class="hook">&#8594; Most AI workflows look smart until you have to run them twice.</span><br><span class="hook">&#8594; The gap between a demo and a reliable system is where most AI projects quietly die.</span><br><span class="hook">&#8594; If your workflow ignores The &#39;First 90 Days of AI Implementation&#39; for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the &#39;AI backlash&#39; audience is actively seeking. Oviro&#39;s positioning as an &#39;intelligence layer&#39; fits perfectly here., it probably isn’t ready yet.</span></div>
+<div class="cta">&#8594; CTA: Invite operators/builders to reply with what keeps breaking in their workflows.</div>
+
+</div>
+<div class="card-foot">
+<button class="btn btn-copy" data-copy="The gap between a demo and a reliable system is where most AI projects quietly die.\n\nA lot of AI content focuses on tools. I care more about failure points.\n\nNot because the tools don’t matter — they do. But most systems fail somewhere much more boring:\n- unclear ownership\n- weak review loops\n- no approval boundary\n- too much automation too early\n\nThat’s the part people skip when they want the shiny version of AI.\n\nI learned this while building and debugging real systems.\n\nWhat I would not build first again.\n\nInteresting systems aren’t the ones that look magical. They’re the ones that survive repetition." onclick="cpyBtn(this)">&#10022; Copy draft</button>
+<button class="btn btn-copy" data-copy="Most AI workflows look smart until you have to run them twice. | The gap between a demo and a reliable system is where most AI projects quietly die. | If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn’t ready yet." onclick="cpyBtn(this)">&#10022; Copy hooks</button>
+<span class="card-meta">ITEM-20260406-0002 &middot; 2026-04-06T16:54</span>
+</div>
+</div>
+<div class="card">
+<div class="card-head">
+<span class="card-title">The highest-leverage MVP decisions under tight budget constraints #3</span>
+<span class="ch ch-linkedin">linkedin</span><span class="st st-muted">draft</span>
+</div>
+<div class="card-body">
+<textarea class="draft-ta" readonly rows="8" onclick="taSelectCopy(this)">If your workflow ignores The &#39;First 90 Days of AI Implementation&#39; for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the &#39;AI backlash&#39; audience is actively seeking. Oviro&#39;s positioning as an &#39;intelligence layer&#39; fits perfectly here., it probably isn’t ready yet.
+
+I’m increasingly convinced that the most useful AI content is not about what’s possible. It’s about what holds up after friction.
+
+That usually means talking about the stuff people find less exciting:
+- constraints
+- tradeoffs
+- manual gates
+- routing
+- reliability
+
+I learned this while building and debugging real systems.
+
+The highest-leverage MVP decisions under tight budget constraints.
+
+If the only thing a workflow does well is impress you once, it’s not a workflow yet.</textarea>
+<div class="hooks"><span class="hook">&#8594; Most AI workflows look smart until you have to run them twice.</span><br><span class="hook">&#8594; The gap between a demo and a reliable system is where most AI projects quietly die.</span><br><span class="hook">&#8594; If your workflow ignores The &#39;First 90 Days of AI Implementation&#39; for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the &#39;AI backlash&#39; audience is actively seeking. Oviro&#39;s positioning as an &#39;intelligence layer&#39; fits perfectly here., it probably isn’t ready yet.</span></div>
+<div class="cta">&#8594; CTA: Invite operators/builders to reply with what keeps breaking in their workflows.</div>
+
+</div>
+<div class="card-foot">
+<button class="btn btn-copy" data-copy="If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn’t ready yet.\n\nI’m increasingly convinced that the most useful AI content is not about what’s possible. It’s about what holds up after friction.\n\nThat usually means talking about the stuff people find less exciting:\n- constraints\n- tradeoffs\n- manual gates\n- routing\n- reliability\n\nI learned this while building and debugging real systems.\n\nThe highest-leverage MVP decisions under tight budget constraints.\n\nIf the only thing a workflow does well is impress you once, it’s not a workflow yet." onclick="cpyBtn(this)">&#10022; Copy draft</button>
+<button class="btn btn-copy" data-copy="Most AI workflows look smart until you have to run them twice. | The gap between a demo and a reliable system is where most AI projects quietly die. | If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn’t ready yet." onclick="cpyBtn(this)">&#10022; Copy hooks</button>
+<span class="card-meta">ITEM-20260406-0003 &middot; 2026-04-06T16:54</span>
+</div>
+</div>
+
+<div class="lbl">System Status</div>
+<div class="sys">
+<div class="sys-card">
+<div class="sys-item"><span class="dot-ok">&#10003;</span> Research fresh (Apr 6)</div>
+<div class="sys-item"><span class="dot-ok">&#10003;</span> Autoloop: 9h &amp; 15h weekdays</div>
+<div class="sys-item"><span class="dot-ok">&#10003;</span> Daily research: 8h</div>
+<div class="sys-item"><span class="dot-ok">&#10003;</span> Anti-AI-slop: LinkedIn-safe</div>
+</div>
+<div class="sys-card">
+<div class="sys-item"><span class="dot-err">&#10007;</span> X account — not connected</div>
+<div class="sys-item"><span class="dot-err">&#10007;</span> LinkedIn — not connected</div>
+<div class="sys-item"><span class="dot-ok">&#10003;</span> Nano Banana via Gemini API</div>
+<div class="sys-item"><span class="dot-ok">&#10003;</span> Copy: textarea select + execCommand</div>
+</div>
+</div>
+
+<div class="lbl">Your Action Items</div>
+<div class="todo">
+<ol>
+<li><strong>Create X account</strong> at x.com — come back with your handle</li>
+<li><strong>Create LinkedIn profile</strong> at linkedin.com</li>
+<li><strong>Get X API credentials</strong> at developer.twitter.com</li>
+</ol>
+</div>
+
+</div>
+
+<script>
+var ITEMS = [{"id": "ITEM-20260407-0010", "title": "My Sachbearbeiter job: document everything. Boring. But it means I don't miss steps buildi #3", "draft": "My Sachbearbeiter job: document everything. Boring. But it means I don't miss steps building Oviro at 11 PM. Consistency win.\\n\\nWhat keeps standing out to me is that the interesting part of AI is not the demo. It's the operating model behind it.\\n\\nThat usually comes down to boring but decisive questions:\\n- who owns the step\\n- what breaks on repetition\\n- where manual review still belongs\\n- what tradeoff you're making between speed, cost, and reliability\\n\\nRecent example: Real systems break in boring ways first.\\n\\nThat's why I pay more attention to constraints, routing, and review loops than to shiny automation clips.\\n\\nIf a workflow only looks good once, it isn't ready yet.", "hooks": ["My Sachbearbeiter job: document everything. Boring. But it means I don't miss st"], "cta": "Anyone else find unexpected skills from their day job useful?", "channel": "x", "state": "needs_human_review"}, {"id": "ITEM-20260407-0001", "title": "Most AI workflows look smart until you have to run them twice.Demo automation is easy. Rel #1", "draft": "Most AI workflows look smart until you have to run them twice.Demo automation is easy. Reliable workflow design is the hard part.I learned this while building and debugging real systems.Spent 4 hours debugging an agent loop. The bug was a missing newline in a config. That's it.Build for repeatability, not applause.", "hooks": ["Most AI workflows look smart until you have to run them twice.", "The gap between a demo and a reliable system is where most AI projects quietly die.", "If your workflow ignores Brand voice frameworks for AI content — how to maintain authentic voice when AI is generating at scale; train AI with your tone/style, it probably isn't ready yet."], "cta": "What keeps breaking in your workflows?", "channel": "x", "state": "needs_human_review"}, {"id": "ITEM-20260406-0014", "title": "Prompt that got me to [result] on the first try. Worth saving. #2", "draft": "The gap between a demo and a reliable system is where most AI projects quietly die.\\n\\nToo much AI content skips ownership, review loops, and constraints.\\n\\nI learned this while building and debugging real systems.\\n\\nPrompt that got me to [result] on the first try. Worth saving.\\n\\nThat's where the real work is.", "hooks": ["Most AI workflows look smart until you have to run them twice.", "The gap between a demo and a reliable system is where most AI projects quietly die.", "If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn't ready yet."], "cta": "What keeps breaking in your workflows?", "channel": "x", "state": "needs_human_review"}, {"id": "ITEM-20260406-0024", "title": "If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is #3", "draft": "If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn't ready yet.Interesting systems are less about novelty and more about what survives friction.I learned this while building and debugging real systems.What my day job taught me about systems thinking that I use in buildingThat's the part worth talking about.\\n\\nWhat keeps standing out to me is that the interesting part of AI is not the demo. It's the operating model behind it.\\n\\nThat usually comes down to boring but decisive questions:\\n- who owns the step\\n- what breaks on repetition\\n- where manual review still belongs\\n- what tradeoff you're making between speed, cost, and reliability\\n\\nRecent example: Real systems break in boring ways first.\\n\\nThat's why I pay more attention to constraints, routing, and review loops than to shiny automation clips.\\n\\nIf a workflow only looks good once, it isn't ready yet.", "hooks": ["Most AI workflows look smart until you have to run them twice.", "The gap between a demo and a reliable system is where most AI projects quietly die.", "If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn't ready yet."], "cta": "What keeps breaking in your workflows?", "channel": "x", "state": "needs_human_review"}, {"id": "ITEM-20260406-0025", "title": "Most AI workflows look smart until you have to run them twice.Demo automation is easy. Rel #1", "draft": "Most AI workflows look smart until you have to run them twice.Demo automation is easy. Reliable workflow design is the hard part.I learned this while building and debugging real systems.Spent 4 hours debugging an agent loop. The bug was a missing newline in a config. That's it.Build for repeatability, not applause.", "hooks": ["Most AI workflows look smart until you have to run them twice.", "The gap between a demo and a reliable system is where most AI projects quietly die.", "If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn't ready yet."], "cta": "What keeps breaking in your workflows?", "channel": "x", "state": "needs_human_review"}, {"id": "ITEM-20260406-0008", "title": "The difference between a demo automation and a reliable operating system #2", "draft": "The gap between a demo and a reliable system is where most AI projects quietly die.\\n\\nToo much AI content skips ownership, review loops, and constraints.\\n\\nI learned this while building and debugging real systems.\\n\\nThe difference between a demo automation and a reliable operating system\\n\\nThat’s where the real work is.", "hooks": ["Most AI workflows look smart until you have to run them twice.", "The gap between a demo and a reliable system is where most AI projects quietly die.", "If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn’t ready yet."], "cta": "Invite operators/builders to reply with what keeps breaking in their workflows.", "channel": "x", "state": "needs_human_review"}, {"id": "ITEM-20260406-0010", "title": "What broke in a multi-agent setup and what the fix taught me #1", "draft": "Most AI workflows look smart until you have to run them twice.\\n\\nDemo automation is easy. Reliable workflow design is the hard part.\\n\\nI learned this while building and debugging real systems.\\n\\nWhat broke in a multi-agent setup and what the fix taught me\\n\\nBuild for repeatability, not applause.", "hooks": ["Most AI workflows look smart until you have to run them twice.", "The gap between a demo and a reliable system is where most AI projects quietly die.", "If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn’t ready yet."], "cta": "Invite operators/builders to reply with what keeps breaking in their workflows.", "channel": "x", "state": "needs_human_review"}, {"id": "ITEM-20260406-0011", "title": "The difference between a demo automation and a reliable operating system #2", "draft": "The gap between a demo and a reliable system is where most AI projects quietly die.\\n\\nToo much AI content skips ownership, review loops, and constraints.\\n\\nI learned this while building and debugging real systems.\\n\\nThe difference between a demo automation and a reliable operating system\\n\\nThat’s where the real work is.", "hooks": ["Most AI workflows look smart until you have to run them twice.", "The gap between a demo and a reliable system is where most AI projects quietly die.", "If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn’t ready yet."], "cta": "Invite operators/builders to reply with what keeps breaking in their workflows.", "channel": "x", "state": "needs_human_review"}, {"id": "ITEM-20260407-0021", "title": "4 hours debugging an agent loop. Bug was a missing newline in prompt config. That's it.", "draft": "4 hours debugging an agent loop. Bug was a missing newline in prompt config. That's it.", "hooks": ["4 hours debugging an agent loop. Bug was a missing newline in prompt config. Tha"], "cta": "Anyone relate?", "channel": "x", "state": "needs_human_review"}, {"id": "ITEM-20260407-0020", "title": "4 hours debugging an agent loop. Missing newline in prompt config. That's it.", "draft": "4 hours debugging an agent loop. Missing newline in prompt config. That's it.", "hooks": ["4 hours debugging an agent loop. Missing newline in prompt config. That's it."], "cta": "Prompt config pain?", "channel": "x", "state": "needs_human_review"}, {"id": "ITEM-20260407-0019", "title": "4 hours debugging an agent loop. Missing newline in prompt config. That's it.", "draft": "4 hours debugging an agent loop. Missing newline in prompt config. That's it.", "hooks": ["4 hours debugging an agent loop. Missing newline in prompt config. That's it."], "cta": "Prompting pain?", "channel": "x", "state": "needs_human_review"}, {"id": "ITEM-20260407-0018", "title": "Spent 4 hours debugging an agent loop. The bug? A missing newline in the prompt config. Th", "draft": "Spent 4 hours debugging an agent loop. The bug? A missing newline in the prompt config. That's it.", "hooks": ["Spent 4 hours debugging an agent loop. The bug? A missing newline in the prompt "], "cta": "Anyone else?", "channel": "x", "state": "needs_human_review"}, {"id": "ITEM-20260407-0017", "title": "4 hours debugging an agent loop. Missing newline in prompt config. That's it.", "draft": "4 hours debugging an agent loop. Missing newline in prompt config. That's it.", "hooks": ["4 hours debugging an agent loop. Missing newline in prompt config. That's it."], "cta": "Anyone else?", "channel": "x", "state": "needs_human_review"}, {"id": "ITEM-20260407-0016", "title": "Spent 4 hours debugging an agent loop. The bug? A missing newline in the prompt config. Th", "draft": "Spent 4 hours debugging an agent loop. The bug? A missing newline in the prompt config. That's it.", "hooks": ["Spent 4 hours debugging an agent loop. The bug? A missing newline in the prompt "], "cta": "Ever had this?", "channel": "x", "state": "needs_human_review"}, {"id": "ITEM-20260407-0015", "title": "4 hours debugging an agent loop. Missing newline in prompt config. That's it. #1", "draft": "4 hours debugging an agent loop. Missing newline in prompt config. That's it.", "hooks": ["4 hours debugging an agent loop. Missing newline in prompt config. That's it."], "cta": "Your worst bug?", "channel": "x", "state": "needs_human_review"}, {"id": "ITEM-20260407-0014", "title": "4 hours debugging an agent loop. Missing newline in prompt config. That's it. #1", "draft": "4 hours debugging an agent loop. Missing newline in prompt config. That's it.", "hooks": ["4 hours debugging an agent loop. Missing newline in prompt config. That's it."], "cta": "Anyone else?", "channel": "x", "state": "needs_human_review"}, {"id": "ITEM-20260407-0008", "title": "4 hours debugging an agent loop. The bug: a missing newline in the prompt config. That's i #1", "draft": "4 hours debugging an agent loop. The bug: a missing newline in the prompt config. That's it. Vibecoding is brutal sometimes.", "hooks": ["4 hours debugging an agent loop. The bug: a missing newline in the prompt config"], "cta": "What's your most frustrating 'simple' bug?", "channel": "x", "state": "needs_human_review"}, {"id": "ITEM-20260407-0011", "title": "4 hours debugging an agent loop. Missing newline in prompt config. That's it. #1", "draft": "4 hours debugging an agent loop. Missing newline in prompt config. That's it.", "hooks": ["4 hours debugging an agent loop. Missing newline in prompt config. That's it."], "cta": "Anyone else?", "channel": "x", "state": "needs_human_review"}, {"id": "ITEM-20260407-0013", "title": "Corporate admin by day, AI builder by night. The mental switch is wild. Sometimes I wonder #3", "draft": "Corporate admin by day, AI builder by night. The mental switch is wild. Sometimes I wonder if I'm just playing pretend. The imposter syndrome is real.\\n\\nMy Sachbearbeiter brain is all about process, rules, 'that's how it's done'. Then I open Cursor and it's 'build whatever'. Total disconnect.\\n\\nSee others shipping complex stuff. My 'win' today was fixing a Claude prompt that saved 15 minutes. Feels small. But it's progress.\\n\\nThe time constraint is brutal. 9-5 then 8-10pm. No big sprints. Just chipping away at small ideas. That's it.\\n\\nThis imposter feeling? It's part of the game when you're building on the side. Not sure it ever goes away. Just gotta keep shipping.", "hooks": ["Corporate admin by day, AI builder by night. The mental switch is wild. Sometime"], "cta": "How do you manage the mental split?", "channel": "x", "state": "needs_human_review"}, {"id": "ITEM-20260407-0012", "title": "Chasing the latest AI tool for my side project? It's an asymmetric downside trade. Huge ti #2", "draft": "Chasing the latest AI tool for my side project? It's an asymmetric downside trade. Huge time sink, low probability of real impact. Better to stick to my vibecoding workflows. That's it.", "hooks": ["Chasing the latest AI tool for my side project? It's an asymmetric downside trad"], "cta": "How do you manage tool FOMO?", "channel": "x", "state": "needs_human_review"}, {"id": "ITEM-20260407-0009", "title": "Every week, a new 'opportunity' pops up for builders. A new tool, a new niche, a new trend #2", "draft": "Every week, a new 'opportunity' pops up for builders. A new tool, a new niche, a new trend. They all look promising.\\n\\nBut chasing every one is like terrible position sizing in trading. You can't put 50% of your capital into every 'sure thing' you see.\\n\\nAs a side builder, my 'capital' is time. Going all-in on a new shiny object means 0% progress on Oviro. It's a guaranteed blow-up.\\n\\nThe real skill isn't spotting opportunities. It's knowing when to size down, or pass entirely, to protect your core position.", "hooks": ["Every week, a new 'opportunity' pops up for builders. A new tool, a new niche, a"], "cta": "What's your mental stop-loss for new ideas?", "channel": "x", "state": "drafted"}, {"id": "ITEM-20260407-0007", "title": "My Sachbearbeiter job in Switzerland taught me something unexpected for Oviro: the grind o #3", "draft": "My Sachbearbeiter job in Switzerland taught me something unexpected for Oviro: the grind of small, repetitive tasks. It's not glamorous.\\n\\nBuilding on the side means 2 hours after work, 1 hour before. No time for \\\"deep work\\\" myths. Just focused sprints on specific tasks.\\n\\nMy day job trained me to just *do* the next thing, even if it's boring. No overthinking, just execution. That discipline is gold.\\n\\nShipping code, talking to users, writing docs for Oviro — it often feels like ticking off a checklist. It's 80% that.\\n\\nIt's messy, often feels like I'm just barely keeping up. But the small tasks add up. Oviro gets built, one box ticked.", "hooks": ["My Sachbearbeiter job in Switzerland taught me something unexpected for Oviro: t"], "cta": "What's your secret for getting the mundane done?", "channel": "x", "state": "needs_human_review"}, {"id": "ITEM-20260407-0006", "title": "Most \\\"opportunities\\\" in building are like chasing a pump in trading. You see others winnin #2", "draft": "Most \\\"opportunities\\\" in building are like chasing a pump in trading. You see others winning, feel the FOMO.\\n\\nIn crypto, everyone talks about the next 10x coin. You jump in late, often at the top, without your own research.\\n\\nSame in building. A new AI tool, a hot niche. You see others \\\"crushing it,\\\" feel like you're missing out on easy wins.\\n\\nSo you commit time, energy, maybe even money. You're trading without an edge, just reacting to market noise.\\n\\nThe \\\"opportunity\\\" dumps. Your capital (time, focus) is gone. No real progress on your actual validated problem.\\n\\nMy rule: If it feels like a pump, it probably is. Stick to your validated edge. Ignore the noise.", "hooks": ["Most \\\"opportunities\\\" in building are like chasing a pump in trading. You see oth"], "cta": "What's your strategy for ignoring the hype?", "channel": "x", "state": "drafted"}, {"id": "ITEM-20260407-0005", "title": "Spent [4 hours] debugging an agent loop. The bug was [a missing newline in a config]. That #1", "draft": "Spent [4 hours] debugging an agent loop. The bug was [a missing newline in a config]. That's it.\\n\\n\\n\\nSpecific. Honest. Worth discussing.", "hooks": ["Spent [4 hours] debugging an agent loop. The bug was [a missing newline in a config]. That's it.", "Brand voice frameworks for AI content — how to maintain authentic voice when AI is generating at scale; train AI with your tone/style", "Here's the specific thing I learned building this."], "cta": "What would you add?", "channel": "x", "state": "needs_human_review"}, {"id": "ITEM-20260407-0004", "title": "If your workflow ignores Brand voice frameworks for AI content — how to maintain authentic #3", "draft": "If your workflow ignores Brand voice frameworks for AI content — how to maintain authentic voice when AI is generating at scale; train AI with your tone/style, it probably isn't ready yet.Interesting systems are less about novelty and more about what survives friction.I learned this while building and debugging real systems.What my day job taught me about systems thinking that I use in buildingThat's the part worth talking about.", "hooks": ["Most AI workflows look smart until you have to run them twice.", "The gap between a demo and a reliable system is where most AI projects quietly die.", "If your workflow ignores Brand voice frameworks for AI content — how to maintain authentic voice when AI is generating at scale; train AI with your tone/style, it probably isn't ready yet."], "cta": "What keeps breaking in your workflows?", "channel": "x", "state": "drafted"}, {"id": "ITEM-20260407-0003", "title": "Most people miss the Why in this.Why most 'opportunities' in building share the same failu #2", "draft": "Most people miss the Why in this.Why most 'opportunities' in building share the same failure mode as focusing on a single trade's P&L instead of the system's long-term expected value.Here's the mental model:Most people think about this as a outcome problem. It's actually a probability distribution problem.The difference in how you frame it changes every downstream decision.This is the part of Why that I keep coming back to from trading.What mental models from other fields have changed how you think about building?", "hooks": ["Why most 'opportunities' in building share the same failure mode as [specific trading mistake]", "Most people miss the Why in this.", "The mental model from mistake] I'm using for building decisions."], "cta": "What am I missing here?", "channel": "x", "state": "needs_human_review"}, {"id": "ITEM-20260407-0002", "title": "Most AI workflows look smart until you have to run them twice. #1", "draft": "Most AI workflows look smart until you have to run them twice.\\n\\nDemo automation is easy. Reliable workflow design is the hard part.\\n\\nI learned this while building and debugging real systems.\\n\\nSpent [4 hours] debugging an agent loop. The bug was [a missing newline in a config]. That's it.\\n\\nBuild for repeatability, not applause.", "hooks": ["Most AI workflows look smart until you have to run them twice.", "The gap between a demo and a reliable system is where most AI projects quietly die.", "If your workflow ignores Brand voice frameworks for AI content — how to maintain authentic voice when AI is generating at scale; train AI with your tone/style, it probably isn't ready yet."], "cta": "What keeps breaking in your workflows?", "channel": "x", "state": "needs_human_review"}, {"id": "ITEM-20260406-0027", "title": "If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is #3", "draft": "If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn't ready yet.Interesting systems are less about novelty and more about what survives friction.I learned this while building and debugging real systems.What my day job taught me about systems thinking that I use in buildingThat's the part worth talking about.", "hooks": ["Most AI workflows look smart until you have to run them twice.", "The gap between a demo and a reliable system is where most AI projects quietly die.", "If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn't ready yet."], "cta": "What keeps breaking in your workflows?", "channel": "x", "state": "needs_human_review"}, {"id": "ITEM-20260406-0026", "title": "Most people miss the Why in this.Why most 'opportunities' in building share the same failu #2", "draft": "Most people miss the Why in this.Why most 'opportunities' in building share the same failure mode as chasing a single big win.Here's the mental model:Most people think about this as a outcome problem. It's actually a probability distribution problem.The difference in how you frame it changes every downstream decision.This is the part of Why that I keep coming back to from trading.What mental models from other fields have changed how you think about building?", "hooks": ["Why most 'opportunities' in building share the same failure mode as [specific trading mistake]", "Most people miss the Why in this.", "The mental model from mistake] I'm using for building decisions."], "cta": "What am I missing here?", "channel": "x", "state": "needs_human_review"}, {"id": "ITEM-20260406-0023", "title": "Most people miss the Why in this.Why most 'opportunities' in building share the same failu #2", "draft": "Most people miss the Why in this.Why most 'opportunities' in building share the same failure mode as chasing a single big win.Here's the mental model:Most people think about this as a outcome problem. It's actually a probability distribution problem.The difference in how you frame it changes every downstream decision.This is the part of Why that I keep coming back to from trading.What mental models from other fields have changed how you think about building?", "hooks": ["Why most 'opportunities' in building share the same failure mode as [specific trading mistake]", "Most people miss the Why in this.", "The mental model from mistake] I'm using for building decisions."], "cta": "What am I missing here?", "channel": "x", "state": "drafted"}, {"id": "ITEM-20260406-0022", "title": "Most AI workflows look smart until you have to run them twice.Demo automation is easy. Rel #1", "draft": "Most AI workflows look smart until you have to run them twice.Demo automation is easy. Reliable workflow design is the hard part.I learned this while building and debugging real systems.Spent 4 hours debugging an agent loop. The bug was a missing newline in a config. That's it.Build for repeatability, not applause.", "hooks": ["Most AI workflows look smart until you have to run them twice.", "The gap between a demo and a reliable system is where most AI projects quietly die.", "If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn't ready yet."], "cta": "What keeps breaking in your workflows?", "channel": "x", "state": "drafted"}, {"id": "ITEM-20260406-0021", "title": "What my day job taught me about [specific skill] that I use in building #3", "draft": "If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn't ready yet.Interesting systems are less about novelty and more about what survives friction.I learned this while building and debugging real systems.What my day job taught me about systems thinking that I use in buildingThat's the part worth talking about.", "hooks": ["Most AI workflows look smart until you have to run them twice.", "The gap between a demo and a reliable system is where most AI projects quietly die.", "If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn't ready yet."], "cta": "What keeps breaking in your workflows?", "channel": "x", "state": "drafted"}, {"id": "ITEM-20260406-0020", "title": "Why most 'opportunities' in building share the same failure mode as [specific trading mistake] #2", "draft": "Most people miss the Why in this.Why most 'opportunities' in building share the same failure mode as confusing a single lucky trade with a robust strategy.Here's the mental model:Most people think about this as a outcome problem. It's actually a probability distribution problem.The difference in how you frame it changes every downstream decision.This is the part of Why that I keep coming back to from trading.What mental models from other fields have changed how you think about building?", "hooks": ["Why most 'opportunities' in building share the same failure mode as [specific trading mistake]", "Most people miss the Why in this.", "The mental model from mistake] I'm using for building decisions."], "cta": "What am I missing here?", "channel": "x", "state": "drafted"}, {"id": "ITEM-20260406-0019", "title": "Spent [4 hours] debugging an agent loop. The bug was [a missing newline in a config]. That's it. #1", "draft": "Most AI workflows look smart until you have to run them twice.Demo automation is easy. Reliable workflow design is the hard part.I learned this while building and debugging real systems.Spent 4 hours debugging an agent loop. The bug was a missing newline in a config. That's it.Build for repeatability, not applause.", "hooks": ["Most AI workflows look smart until you have to run them twice.", "The gap between a demo and a reliable system is where most AI projects quietly die.", "If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn't ready yet."], "cta": "What keeps breaking in your workflows?", "channel": "x", "state": "drafted"}, {"id": "ITEM-20260406-0016", "title": "Built [X] with vibecoding in [time]. Here's the honest verdict. #1", "draft": "Most AI workflows look smart until you have to run them twice.\\n\\nDemo automation is easy. Reliable workflow design is the hard part.\\n\\nI learned this while building and debugging real systems.\\n\\nBuilt [X] with vibecoding in [time]. Here's the honest verdict.\\n\\nBuild for repeatability, not applause.", "hooks": ["Most AI workflows look smart until you have to run them twice.", "The gap between a demo and a reliable system is where most AI projects quietly die.", "If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn't ready yet."], "cta": "What keeps breaking in your workflows?", "channel": "x", "state": "drafted"}, {"id": "ITEM-20260406-0017", "title": "Why most 'opportunities' in [building/trading/AI] share the same failure mode #2", "draft": "Most people miss the Why in this.\\n\\nWhy most 'opportunities' in [building/trading/AI] share the same failure mode.\\n\\nHere's the mental model:\\n\\nMost people think about this as a outcome problem. It's actually a probability distribution problem.\\n\\nThe difference in how you frame it changes every downstream decision.\\n\\nThis is the part of Why that I keep coming back to from trading.\\n\\nWhat mental models from other fields have changed how you think about building?", "hooks": ["Why most 'opportunities' in [building/trading/AI] share the same failure mode", "Most people miss the Why in this.", "The mental model from mode I'm using for building decisions."], "cta": "What am I missing here?", "channel": "x", "state": "drafted"}, {"id": "ITEM-20260406-0018", "title": "What [player] does that most people watching don't notice #3", "draft": "What [player] does that most people watching don't notice\\n\\nNot a score update. Just: the structural play here is worth thinking about.", "hooks": ["What [player] does that most people watching don't notice", "Watching don't is like watching a system, not just a player.", "The structural thing about What that most fans miss."], "cta": "What are you watching for in this one?", "channel": "x", "state": "drafted"}, {"id": "ITEM-20260406-0013", "title": "Built [X] with vibecoding in [time]. Here's the honest verdict. #1", "draft": "Most AI workflows look smart until you have to run them twice.\\n\\nDemo automation is easy. Reliable workflow design is the hard part.\\n\\nI learned this while building and debugging real systems.\\n\\nBuilt [X] with vibecoding in [time]. Here's the honest verdict.\\n\\nBuild for repeatability, not applause.", "hooks": ["Most AI workflows look smart until you have to run them twice.", "The gap between a demo and a reliable system is where most AI projects quietly die.", "If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn't ready yet."], "cta": "What keeps breaking in your workflows?", "channel": "x", "state": "drafted"}, {"id": "ITEM-20260406-0015", "title": "3 things I learned building [system] that weren't in any tutorial #3", "draft": "If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn't ready yet.\\n\\nInteresting systems are less about novelty and more about what survives friction.\\n\\nI learned this while building and debugging real systems.\\n\\n3 things I learned building [system] that weren't in any tutorial\\n\\nThat's the part worth talking about.", "hooks": ["Most AI workflows look smart until you have to run them twice.", "The gap between a demo and a reliable system is where most AI projects quietly die.", "If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn't ready yet."], "cta": "What keeps breaking in your workflows?", "channel": "x", "state": "drafted"}, {"id": "ITEM-20260406-0012", "title": "Why most AI workflows fail after the first impressive output #3", "draft": "If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn’t ready yet.\\n\\nInteresting systems are less about novelty and more about what survives friction.\\n\\nI learned this while building and debugging real systems.\\n\\nWhy most AI workflows fail after the first impressive output\\n\\nThat’s the part worth talking about.", "hooks": ["Most AI workflows look smart until you have to run them twice.", "The gap between a demo and a reliable system is where most AI projects quietly die.", "If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn’t ready yet."], "cta": "Invite operators/builders to reply with what keeps breaking in their workflows.", "channel": "x", "state": "drafted"}, {"id": "ITEM-20260406-0007", "title": "What broke in a multi-agent setup and what the fix taught me #1", "draft": "Most AI workflows look smart until you have to run them twice.\\n\\nDemo automation is easy. Reliable workflow design is the hard part.\\n\\nI learned this while building and debugging real systems.\\n\\nWhat broke in a multi-agent setup and what the fix taught me\\n\\nBuild for repeatability, not applause.", "hooks": ["Most AI workflows look smart until you have to run them twice.", "The gap between a demo and a reliable system is where most AI projects quietly die.", "If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn’t ready yet."], "cta": "Invite operators/builders to reply with what keeps breaking in their workflows.", "channel": "x", "state": "needs_human_review"}, {"id": "ITEM-20260406-0009", "title": "Why most AI workflows fail after the first impressive output #3", "draft": "If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn’t ready yet.\\n\\nInteresting systems are less about novelty and more about what survives friction.\\n\\nI learned this while building and debugging real systems.\\n\\nWhy most AI workflows fail after the first impressive output\\n\\nThat’s the part worth talking about.", "hooks": ["Most AI workflows look smart until you have to run them twice.", "The gap between a demo and a reliable system is where most AI projects quietly die.", "If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn’t ready yet."], "cta": "Invite operators/builders to reply with what keeps breaking in their workflows.", "channel": "x", "state": "drafted"}, {"id": "ITEM-20260406-0004", "title": "What broke in a multi-agent setup and what the fix taught me #1", "draft": "Most AI workflows look smart until you have to run them twice.\\n\\nDemo automation is easy. Reliable workflow design is the hard part.\\n\\nI learned this while building and debugging real systems.\\n\\nWhat broke in a multi-agent setup and what the fix taught me\\n\\nBuild for repeatability, not applause.", "hooks": ["Most AI workflows look smart until you have to run them twice.", "The gap between a demo and a reliable system is where most AI projects quietly die.", "If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn’t ready yet."], "cta": "Invite operators/builders to reply with what keeps breaking in their workflows.", "channel": "x", "state": "needs_human_review"}, {"id": "ITEM-20260406-0005", "title": "The difference between a demo automation and a reliable operating system #2", "draft": "The gap between a demo and a reliable system is where most AI projects quietly die.\\n\\nToo much AI content skips ownership, review loops, and constraints.\\n\\nI learned this while building and debugging real systems.\\n\\nThe difference between a demo automation and a reliable operating system\\n\\nThat’s where the real work is.", "hooks": ["Most AI workflows look smart until you have to run them twice.", "The gap between a demo and a reliable system is where most AI projects quietly die.", "If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn’t ready yet."], "cta": "Invite operators/builders to reply with what keeps breaking in their workflows.", "channel": "x", "state": "needs_human_review"}, {"id": "ITEM-20260406-0006", "title": "Why most AI workflows fail after the first impressive output #3", "draft": "If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn’t ready yet.\\n\\nInteresting systems are less about novelty and more about what survives friction.\\n\\nI learned this while building and debugging real systems.\\n\\nWhy most AI workflows fail after the first impressive output\\n\\nThat’s the part worth talking about.", "hooks": ["Most AI workflows look smart until you have to run them twice.", "The gap between a demo and a reliable system is where most AI projects quietly die.", "If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn’t ready yet."], "cta": "Invite operators/builders to reply with what keeps breaking in their workflows.", "channel": "x", "state": "drafted"}, {"id": "ITEM-20260406-0001", "title": "Why most AI workflows fail after the first impressive output #1", "draft": "Most AI workflows look smart until you have to run them twice.\\n\\nOne thing I keep noticing while building operator-grade AI systems: the first version usually proves the concept, not the operating model.\\n\\nThe real work starts when you ask:\\n- who owns what\\n- what breaks under repetition\\n- where the approval/risk boundary sits\\n- what should stay manual until reliability is earned\\n\\nThat’s why I’m more interested in routing, review loops, and constraints than flashy automations.\\n\\nRecent example: I learned this while building and debugging real systems.\\n\\nWhy most AI workflows fail after the first impressive output.\\n\\nIf you’re building with AI, design for the second run — not the demo.", "hooks": ["Most AI workflows look smart until you have to run them twice.", "The gap between a demo and a reliable system is where most AI projects quietly die.", "If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn’t ready yet."], "cta": "Invite operators/builders to reply with what keeps breaking in their workflows.", "channel": "linkedin", "state": "drafted"}, {"id": "ITEM-20260406-0002", "title": "What I would not build first again #2", "draft": "The gap between a demo and a reliable system is where most AI projects quietly die.\\n\\nA lot of AI content focuses on tools. I care more about failure points.\\n\\nNot because the tools don’t matter — they do. But most systems fail somewhere much more boring:\\n- unclear ownership\\n- weak review loops\\n- no approval boundary\\n- too much automation too early\\n\\nThat’s the part people skip when they want the shiny version of AI.\\n\\nI learned this while building and debugging real systems.\\n\\nWhat I would not build first again.\\n\\nInteresting systems aren’t the ones that look magical. They’re the ones that survive repetition.", "hooks": ["Most AI workflows look smart until you have to run them twice.", "The gap between a demo and a reliable system is where most AI projects quietly die.", "If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn’t ready yet."], "cta": "Invite operators/builders to reply with what keeps breaking in their workflows.", "channel": "linkedin", "state": "drafted"}, {"id": "ITEM-20260406-0003", "title": "The highest-leverage MVP decisions under tight budget constraints #3", "draft": "If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn’t ready yet.\\n\\nI’m increasingly convinced that the most useful AI content is not about what’s possible. It’s about what holds up after friction.\\n\\nThat usually means talking about the stuff people find less exciting:\\n- constraints\\n- tradeoffs\\n- manual gates\\n- routing\\n- reliability\\n\\nI learned this while building and debugging real systems.\\n\\nThe highest-leverage MVP decisions under tight budget constraints.\\n\\nIf the only thing a workflow does well is impress you once, it’s not a workflow yet.", "hooks": ["Most AI workflows look smart until you have to run them twice.", "The gap between a demo and a reliable system is where most AI projects quietly die.", "If your workflow ignores The 'First 90 Days of AI Implementation' for Ecommerce: No one is publishing detailed, honest accounts of what it actually looks like to integrate AI into an ecommerce operation in real time — the messy middle, the tools that got abandoned, the team friction, the customer reactions. This is the anti-hype, specific content that the 'AI backlash' audience is actively seeking. Oviro's positioning as an 'intelligence layer' fits perfectly here., it probably isn’t ready yet."], "cta": "Invite operators/builders to reply with what keeps breaking in their workflows.", "channel": "linkedin", "state": "drafted"}];
+
+function taSelectCopy(el) {
+  el.select();
+  el.setSelectionRange(0, 99999);
+  try { document.execCommand("copy"); } catch(e) {}
+  el.classList.add("copied");
+  setTimeout(function() { el.classList.remove("copied"); }, 1200);
+}
+
+function cpyBtn(btn) {
+  var raw = btn.getAttribute("data-copy") || "";
+  var text = raw.replace(/\\n/g, "
+").replace(/\\t/g, "	");
+  var ta = document.createElement("textarea");
+  ta.value = text;
+  ta.style.position = "fixed";
+  ta.style.left = "-9999px";
+  document.body.appendChild(ta);
+  ta.select();
+  ta.setSelectionRange(0, 99999);
+  try { document.execCommand("copy"); } catch(e) {}
+  document.body.removeChild(ta);
+  var orig = btn.textContent;
+  btn.classList.add("copied");
+  btn.textContent = "✓";
+  setTimeout(function() {
+    btn.classList.remove("copied");
+    btn.textContent = orig;
+  }, 1200);
+}
+
+function copyAllDrafts() {
+  var lines = [];
+  for (var i = 0; i < ITEMS.length; i++) {
+    var item = ITEMS[i];
+    var hooks = (item.hooks || []).join("\n").replace(/\\n/g, "
+");
+    var draft = item.draft.replace(/\\n/g, "
+");
+    lines.push("=== " + item.title.replace(/\\n/g, "
+") + " ===\n" + draft + "\n\nHooks:\n" + hooks + "\n\nCTA: " + item.cta.replace(/\\n/g, "
+"));
+  }
+  var all = lines.join("\n\n---\n\n").replace(/\\n/g, "
+");
+  var ta = document.createElement("textarea");
+  ta.value = all;
+  ta.style.position = "fixed";
+  ta.style.left = "-9999px";
+  document.body.appendChild(ta);
+  ta.select();
+  ta.setSelectionRange(0, 99999);
+  try { document.execCommand("copy"); } catch(e) {}
+  document.body.removeChild(ta);
+  var btn = document.getElementById("copy-all-btn");
+  var orig = btn.textContent;
+  btn.classList.add("copied");
+  btn.textContent = "✓";
+  setTimeout(function() {
+    btn.classList.remove("copied");
+    btn.textContent = orig;
+  }, 1500);
+}
+</script>
+</body>
+</html>
